@@ -7,7 +7,7 @@
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD3, votre fork privé du TD3 (**attention, pas de fork à la main !**):
 
-https://classroom.github.com/a/TiyLfsDY
+https://classroom.github.com/a/jziQocZu
 
 la version [pdf](ressources/td3.pdf)
 
