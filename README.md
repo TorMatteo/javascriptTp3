@@ -23,77 +23,55 @@ A tout moment, il sera prévenu du nombre de mines qu’il a à proximité immé
    <img src="ressources/img1.png">
 </p>
 
-## EXERCICE 1 - l'objet Equipe
+S’il arrive au trésor, ou s’il marche sur une mine, ou enfin s’il atteint le trésor, alors un message donne l’information et le jeu est arrêté.
 
-Une Equipe aura comme attributs : 
+Vous utiliserez dans ce TD les objets JavaScript suivants :
 
-- son nom ;
-- son classement ;
-- son nombre de points ;
-- son nombre de matchs gagnés (pour enrichir l’affichage) ;
-- son nombre de matchs nuls (idem) ;
-- son nombre de match perdus (idem) ;
-- son nombre de buts pour (les buts marqués) ;
-- son nombre de buts contre (les buts encaissés) ;
-- son « évaluation » qui permettra de définir son classement.
+- un objet Personnage, associé à la balise `<img id="personnage">`
+- un objet Tresor, associé à la balise `<img id="tresor">`
+- un objet Champ, associé à la balise `<div id="carteMines">` 
 
-Exemple de calcul d’évaluation : une équipe qui aurait cet état :
+Les classes Personnage et Tresor héritent d’une classe `Element` qui regroupe les attributs et méthodes en commun.
 
-21 points, 23 buts pour, 11 buts contre
+Les fichiers `jeu.html` et `jeu.css` constituent une base de travail, ainsi que les images fournies. Vous testerez, dans la console, les méthodes que vous coderez.
 
-aura pour évaluation **de base** le nombre obtenu par le calcul
+## EXERCICE 1 - la classe Element
 
-`21 * 10000 + (23 – 11) * 100 + 23`, ce qui donne `211223` et ce nombre donne donc la priorité aux points, puis à la différence de buts (buts marqués - buts encaissés), puis à l’attaque (buts marqués). Pour parer à l’éventualité de deux ex-aequo, on complète toujours cette évaluation de base en y ajoutant un nombre aleatoire entre 0 et 1. Ainsi, il n'y aura jamais d'égalité parfaite et les équipes auront toutes un rang différent.
+La classe `Element` aura deux classes filles : `Tresor` et `Personnage`. Il n’y aura donc pas d’objet `Element` proprement dit, mais un `Personnage` et un `Tresor`.
 
-Par exemple, il est possible que l'équipe précédente ait une évaluation complète égale à `211223.41526784568`.
+On définit un `Element` par les attributs suivants :
 
-1. Complétez le constructeur donné dans le fichier `equipe.js`. Vous initialiserez l’attribut `evaluation` à une valeur donnée par `Math.random()` (nombre aléatoire entre 0 et 1).
+- `coordX`, nombre qui représente l’abscisse de l’élément dans le terrain. Partons du principe que la première colonne (la plus à gauche) correspond à `coordX = 1`, et la dernière colonne à `coordX = 20`.
 
-2. Incorporez le fichier `equipe.js` avant `</body>` par 
+- `coordY`, nombre qui représente l’ordonnée de l’élément. La ligne du haut (celle du trésor) correspondra à `coordY = 1` et la ligne du bas (d’où partira le personnage) correspondra à `coordY = 20`.
 
-		<script type="text/javascript" src="js/equipe.js"></script>
+- `sprite`, qui correspond à la balise `html` liée à cet élément. On pourrait aussi choisir de dissocier complètement les balises  `html` des objets `Element` qui leur sont intuitivement associés.
 
-3. actualisez la page `championnat.html` et testez le constructeur dans la console, par exemple en créant une nouvelle équipe par une instruction comme 
+On prévoit les méthodes suivantes :
 
-		let eq1 = new Equipe("PSG"); 
++ `constructor(x,y,id)`, qui construit un nouvel `Element`, de coordonnées `x` et `y`, et de `sprite` la balise `html` dont l’identifiant est le paramètre `id`.
 
-   puis affichez `eq1` dans la console (`eq1` et `Entrée`). Vous pouvez « déplier » l’objet créé et examiner ce qui s’affiche. 
++ `setSprite(str)`, qui met à jour le `src` du `sprite` en lui donnant la valeur du paramètre `str`.
 
-4. Codez la fonction `evaluer()` comme c’est suggéré en page précédente. Testez cette fonction en changeant « à la main » les valeurs de certains attributs de `eq1` (dans la console) et lancez l’exécution de `eq1.evaluer()` dans la console également. Réaffichez `eq1` pour voir le résultat.
++ `initialiser(x,y,str)`, qui donne aux attributs `coordX` et `coordY` les valeurs des paramètres `x` et `y`, puis agit aussi sur l’attribut `src` du `sprite` de l’`Element` en lui donnant la valeur du paramètre `str` par l’appel de `setSprite`, et enfin place l’`Element` (en appelant la méthode place décrite juste après).
 
-5. Codez la fonction `affichage()`, équivalent d’un `toString()` et qui donnera le résumé de l’état actuel de l’équipe. Ci-dessous une succession de commandes lancées dans la console, dont l’affichage final :
++ `placer()`, qui positionne le `sprite` en ajustant son `top` et son `left` en fonction des coordonnées de l’Element. 
+Il faudra donc modifier la valeur de `this.sprite.style.top` et de `this.sprite.style.left`. Le mode de calcul sera à mettre en place. Testez vos formules en console. Comme indications, chaque case de l’image de fond est un carré de 20 px de côté et le quadrillage est décalé de 51 px des bords de l’écran, comme indiqué ci-dessous. Les valeurs à attribuer à `this.sprite.style.top` et `this.sprite.style.left` seront donc construites à partir de `this.coordX`, `this.coordY`, et des nombres 51 et 20.
 
-   <p align="center">
-	   <img src="ressources/aff.jpg">
-   </p>
+<p align="center">
+   <img src="ressources/img2.png">
+</p>
 
-   Le numéro 1 devant le nom de l’équipe est son classement.
+Codez cette classe Element en complétant le fichier `element.js`.
 
-   Pour le moment, ce n'est pas important, mais vous pourrez, **plus tard**, styliser un peu mieux cet affichage pour que les affichages des huit équipes donnent un rendu de tableau, comme ci-dessous :
+Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pourrez en console tester les commandes suivantes :
 
-   <p align="center">
-	   <img src="ressources/aff2.jpg">
-   </p>
+<p align="center">
+   <img src="ressources/img3.png">
+</p>
 
-6. Codez enfin la fonction `mise_a_jour(bp,bc)` qui met à jour le nombre de points, le nombre de buts pour et contre, le nombre de victoires, nuls et défaites, et qui actualise l’évaluation en lançant la fonction `evaluer()`. 
 
-   Remarque : les paramètres `bp` et `bc` correspondent bien sûr au résultat d’un match joué par l’équipe, où elle marque `bp` buts et en encaisse `bc`.
-
-7. Testez cette nouvelle fonction à partir de `eq1` qui a certaines valeurs d’attributs suite à vos différentes manœuvres. Par exemple, pour continuer le précédent écran :
-
-   <p align="center">
-	   <img src="ressources/aff3.jpg">
-   </p>
-
-   Remarque : il peut être utile, puisque nous rafraîchissons régulièrement la page, de sauvegarder les commandes à insérer dans la console dans un script, inséré après `equipe.js`, en bas de `championnat.html` et dont le code pourrait être :
-
-  		let eq1 = new Equipe("PSG");
-		eq1.G = 6;
-		eq1.N = 3;
-		eq1.P = 2;
-		...
-
-## EXERCICE 2 - l'objet Match
+## EXERCICE 2 - la classe Tresor
 
 Un Match aura comme attributs : 
 
