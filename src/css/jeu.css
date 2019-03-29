@@ -1,0 +1,53 @@
+body {
+	background-image: url("../img/image_de_fond.png");
+	background-repeat: no-repeat;
+}
+#personnage, #tresor {
+	width:18px;
+	position:fixed;
+}
+#message  {
+	position:fixed;
+	top:100px;
+	left:550px;
+}
+#affichage {
+	position:fixed;
+	top:50px;
+	left:550px;
+}
+#lien {
+	position:fixed;
+	top:470px;
+	left:50px;
+	width:400px;
+	display:flex;
+	justify-content: space-around;
+}
+a {
+	border:solid 1px grey;
+	border-radius:4px;
+	background-color: lightgrey;
+	box-shadow: 4px 4px 4px grey;
+	color:black;
+	outline: none;
+	position:relative;
+	text-decoration: none;
+	line-height: 1.5em;
+	padding:5px;
+	margin:0px 20px;
+}
+a:active {
+	top:2px;
+	left:2px;
+	box-shadow: 2px 2px 2px grey;
+}
+.visible, .cachee {
+	display:inline;
+	position:fixed;
+	width:18px;
+	height:18px;
+}
+.cachee {
+	visibility:hidden;
+}
