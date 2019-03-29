@@ -71,6 +71,7 @@ Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour 
 <p align="center" style="border:solid 1 px black;">
    <img src="ressources/img3.png">
 </p>
+
 ![](ressources/img3.png){: width=150 height=100 style="border: solid 1px black;"}
 
 ## EXERCICE 2 - la classe Tresor
