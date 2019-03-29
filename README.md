@@ -66,49 +66,25 @@ Codez cette classe Element en complétant le fichier `element.js`.
 
 Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pourrez en console tester les commandes suivantes :
 
-<p align="center">
+<p align="center" style="border:solid 1 px black;">
    <img src="ressources/img3.png">
 </p>
 
 
 ## EXERCICE 2 - la classe Tresor
 
-Un Match aura comme attributs : 
+Un objet `Tresor` est un objet très simple. Il n’est pas amené à se déplacer. On prévoiera seulement comme méthodes :
 
-- son équipe 1 notée `equ1` ;
-- son équipe 2 notée `equ2` ;
-- le nombre de buts marqués par equ1, qui sera noté `res1`;
-- le nombre de buts marqués par equ2, qui sera noté `res2`;
-- un booléen `played` qui dit si le match a été joué ou non.
++ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe Element. Il n’y a besoin que d’un paramètre x (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre name sera l’identifant de la balise qui sera naturellement associée au trésor.
 
+initialiser(x), qui évoque la méthode initialiser de la classe Element. A vous de trouver avec quels paramètres on évoque cette méthode.
 
-1. Complétez le constructeur donné dans le fichier `match.js`. Vous initialiserez l’attribut `played` à `false`, puisque le match créé n’est pas encore joué. Vous initialiserez les autres attributs de manière sensée.
+Codez cette classe Tresor en complétant le fichier tresor.js. Testez les méthodes dans la console.
 
-2. Incorporez le fichier `match.js` à la suite de `equipe.js`.
-
-3. Testez votre constructeur en créant deux équipes, puis un match entre ces deux équipes. Exemple de test :
-
-   <p align="center">
-	   <img src="ressources/aff4.jpg">
-   </p>
-
-4. Codez la fonction `jouer()` qui permet de donner des valeurs à `this.res1` et à `this.res2`. En général, même s’il y a bien des exceptions, une équipe qui joue à domicile est légèrement favorisée. A vous de le mettre en œuvre. 
-
-   Remarques : 
-
-+ `Math.floor(…)` renvoie la partie entière
-+ `Math.floor(Math.random()*5)` donne un entier entre 0 et 4.
-
-5. Codez la fonction `maj_equipes()` qui met à jour les attributs des deux équipes du match, à partir des valeurs de `this.res1` et de `this.res2`.
-
-   Conseil : réutilisez la méthode `mise_a_jour` de `Equipe`.
-
-
-6. Codez enfin la fonction `affichage()` qui sera le `toString()` du match et qui produira quelque chose comme ça : 
-
-   <p align="center">
-	   <img src="ressources/aff5.jpg">
-   </p>
+Remarques :
+ 
+vous ferez appel au super-constructeur dans constructor(x) ;
+vous ferez appel à la méthode mère initialiser de Element dans initialiser(x).
 
 ## EXERCICE 3 - l'objet Journee
 
