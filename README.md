@@ -67,14 +67,17 @@ Codez cette classe Element en complétant le fichier `element.js`.
 Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pourrez en console tester les commandes suivantes :
 
 
+<style type="text/css">
+	.cadre {
+		border:solid 1px black;
+	}
+</style>
 
 <p align="center" >
-   <img src="ressources/img3.png">
+   <img class="cadre" src="ressources/img3.png">
 </p>
 
-<div style="border:solid 1 px black;">
-	![](ressources/img3.png)
-</div>
+
 
 ## EXERCICE 2 - la classe Tresor
 
