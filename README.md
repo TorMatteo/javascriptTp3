@@ -86,237 +86,115 @@ Remarques :
 vous ferez appel au super-constructeur dans `constructor(x)` ;
 vous ferez appel à la méthode mère `initialiser` de `Element` dans `initialiser(x)`.
 
-## EXERCICE 3 - l'objet Journee
+## EXERCICE 3 - la classe Champ
 
-Une Journee aura comme attributs : 
+Avant de coder la classe `Personnage`, qui hérite aussi de la classe `Element`, on va coder la classe `Champ` car `Personnage` utilise dans certaines de ses méthodes un objet `Champ`.
 
-- son match n°1 noté `match1`;
-- son match n°2 noté `match2`;
-- son match n°3 noté `match3`;
-- son match n°4 noté `match4`;
-- un booléen `played` qui dit si la journée a été jouée ou non.
+Un objet `Champ` a pour attributs un tableau nommé `carte`, et un autre attribut nommé `balise_div` qui correspondra à la balise `html` naturellement associée au champ de mines. Comme pour `Tresor` et `Personnage`, on aurait pu se passer de cet attribut en le dissociant de l’objet. C’est juste un autre point de vue.
 
+Un objet `Champ` aura 3 méthodes :
 
-1. Complétez le constructeur donné dans le fichier `journee.js`. Vous initialiserez l’attribut `played` à `false`.
++ `constructor(xP,xT,proba)`, qui prend plusieurs étapes :
 
-2. Incorporez le fichier `journee.js` à la suite de `match.js`.
+	- créer `this.carte`, qui est un tableau matérialisant 20 lignes et 20 colonnes. Les paramètres `xP` et `xT` désignent les `coordX` initiales du trésor et du personnage. 
 
-3. Testez votre constructeur comme précédemment, en créant dans la console 8 équipes, puis 4 matchs, puis 1 journée.
+	On pourra considérer `this.carte` comme un tableau de 20 lignes, chacune des lignes étant un tableau de 20 cases. Chacune des 400 cases sera remplie soit avec un 0 soit avec un 1, en fonction du tirage d’un nombre aléatoire classique entre 0 et 1. 
 
-4. Codez la fonction `afficher()`. Elle est un peu différente des précédents affichages. En effet, l’idée est ici de remplir le `innerHTML` des 4 `<div>` du document html qui correspondent aux 4 matchs (repérez-les par leurs identifiants). Chacun de ces div devra refléter l’affichage du match qui lui correspond.
+	On pourra décider que si ce nombre aléatoire est inférieur au paramètre proba, alors on insère un 1 (= une mine) et sinon un 0 (= pas de mine). 
 
-5. Testez votre fonction `afficher()` dans la console. Elle doit produire un affichage visible (enfin !) dans le navigateur. Vous améliorerez l’esthétique de votre affichage plus tard (avec des balises `<table>`). L’essentiel n’est pas là.
+	N’oubliez pas la méthode push des tableaux en JavaScript (voir Cours 1). 
 
-6. Codez la fonction `jouer()` qui, si la journée n’est pas encore jouée :
-- joue les 4 matchs de la journée ;
-- affiche la journée par la méthode précédente ;
-- passe le booléen played à `true` ;
-- met à jour chaque équipe grâce à la fonction `maj_equipes()`.
+	- nettoyer un peu `this.carte`. Pour cela affectez de force 0 aux cases de `this.carte` correspondant aux proximités immédiates du trésor et du personnage. Le trésor ne doit pas être miné, ni sa proximité immédiate, ni celle de la position initiale du personnage.
 
-7. Testez cette fonction en la lançant dans la console après avoir testé votre question 5. Vous devez constater l’affichage des nouveaux scores.
+	Remarque : RIEN ne garantit qu’il existe un chemin possible vers le trésor. Il y a une forte probabilité, certainement fastidieuse à calculer, qu’au moins un chemin victorieux existe.
 
+	- Affecter à `this.balise_div` la bonne balise `html`.
 
-## EXERCICE 4 - l’objet Championnat
 
-1. Le constructeur de Championnat vous est fourni. Un objet Championnat a trois attributs : 
-- un tableau d’équipes nommé  `tabEquipes` ;
-- en entier `numJournee` qui dit quelle est la journée active ;
-- un tableau `journees` contenant les 14 journées du planning.
++ `afficher()`, qui a pour mission de remplir `this.balise_div` de 400 images dont la source est le fichier `img/croix.png`, et dont les `top` et `left` seront à calculer. Ces images auront soit la classe css `visible`, soit la classe css `cachee`. Ainsi, on verra s’afficher des croix partout où il y a une mine, et nulle part ailleurs.
 
-   Analysez ce code et comprenez ce qui est fait. Vous remarquerez en particulier les méthodes sur les tableaux. N’oubliez pas d’insérer le fichier `championnat.js`.
++ `cacher()`, qui a pour mission de supprimer toutes les balises filles de `this.balise`, et donc potentiellement les 400 images crées par l’action de `afficher()`.
 
-2. Codez la fonction `jouer_journee(i)` dont l’exécution fera jouer la journée n°i du planning (attention, la journée n°1 du planning correspond à l’élément d’indice 0 du tableau `journees` de `this`).
+Codez cette classe `Champ` en complétant le fichier `champ.js`. Testez les méthodes dans la console. Cette classe possède 3 méthodes pas simples à coder, il faut être méticuleux.
 
-3. Codez la fonction `afficher_journee(i)`, dont l’exécution lancera l’affichage de la journée n°i du planning. Même remarque que pour la question précédente.
+Pour les méthodes `afficher()` et `cacher()`, vous pourrez utiliser :
+	- `createElement`
+	- `appendChild`
+	- `removeChild`
 
-4. Codez la fonction `afficher_classement()`. Pour cela, vous remplirez :
-- la `<div>` d’identifiant **titres** qui donne les items de chaque colonne, à savoir : nom, points, G, N, P, buts pour, buts contre et différence (buts pour – buts contre)
-- les `<div>` identifiés "1", "2", …, "8". Chacune de ces div recevra l’affichage de l’équipe dont le classement correspond à l’identifiant de la div.
 
-5. Codez la fonction `classer_equipes()`. Sa mission est de mettre à jour l’attribut classement des 8 équipes après avoir calculé leur évaluation.
+## EXERCICE 4 - la classe Personnage
 
-   **Aide 1** : il peut être utile d’avoir à trier par ordre **croissant** un certain tableau de nombres. Si nous devons trier un tableau `t`, alors cela peut se faire simplement en JavaScript par :
+Un objet `Personnage` est plus complexe qu’un objet `Tresor`. Tout d’abord il a un attribut supplémentaire : son `score`, qui est au début de la partie fixé à 200. Ensuite, il a des méthodes liées à sa capacité de mouvement. Enfin, il a des méthodes liées au trésor et aux mines du champ. 
 
-   `t.sort(function(a,b) {return a-b;})`
+**Méthodes à prévoir :**
 
-   Explication : `t.sort()` trierait `t` en considérant ces éléments comme des chaînes de caractères. Le tri serait alphabétique. Autrement dit, 112 serait considéré comme « inférieur » à 13.
++ `constructor(x)`, qui construit le personnage en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera placé le personnage au début) puisque la ligne est obligatoirement celle du bas (ligne 20), et le paramètre name sera l’identifant de la balise qui sera naturellement associée au personnage. Même remarque que pour `Tresor` (super-constructeur).
 
-   Le paramètre donné à la méthode `sort` permet d’imposer un autre critère de tri. Pour le cas présent, deux éléments `a` et `b` seront triés dans l’ordre `a < b` si la fonction paramètre retourne un résultat négatif. Comme cette fonction a été codée pour retourner `a-b`, on aura le tri `a < b` si `a-b < 0` ce qui est cohérent avec l’ordre attendu entre les nombres.
++ `initialiser(x)`, qui évoque la méthode `initialiser` de la classe `Element`. A vous de trouver avec quels paramètres on évoque cette méthode. Il faudra aussi réinitialiser le `score` du personnage à 200. Ceci servira quand on recommence le même parcours après avoir perdu la partie. Même remarque que pour `Tresor` (`super.initialiser`).
 
-   Si c’est encore un peu obscur, retenez que l’instruction `t.sort(function(a,b) {return a-b;})` permet de trier le tableau de nombres `t` par **ordre croissant**.
++ `nbProxMines(C)`, qui retourne le nombre de mines à proximité du personnage `this`, mines qui sont répertoriées dans `C.carte`. On aurait pu se passer du paramètre Champ `C` en considérant que c’est une variable globale, mais c’est un autre point de vue.
 
-   De même, l’instruction 
++ `indiquer_situation()`, qui calcule le nombre de mines à proximité de `this`, puis l’affiche dans la balise « affichage ». Cette méthode affiche aussi le `score` de `this` dans la balise « message ». Enfin, elle met à jour le `sprite` de `this` : si le nombre de mines à proximité est 0, c’est le sourire, sinon c’est la grimace.
 
-   `t.sort(function(a,b) {return b-a;})`
++ `mouvement(dx,dy)`, qui ajoute (si c’est possible ! => à tester) `dx` à `coordX` et `dy` à `coordY`. Quand ces additions sont possibles, il faudra aussi placer le personnage, diminuer son score d’une unité et indiquer sa situation.
 
-   permet de trier un tableau de nombres par **ordre décroissant**. Ceci peut servir...
++ `trouve(T)`, qui retourne un booléen disant si le personnage est arrivé au trésor `T` passé en paramètre.
 
-   **Aide 2** : `t.indexOf(num)` retourne l’indice de `num` dans le tableau `t`.
++ `explose(C)`, qui retourne un booléen disant si le personnage a mis le pied sur une mine du champ `C` passé en paramètre.
 
-   Avec tout ceci, vous devriez vous en tirer.
+Codez cette classe `Personnage` en complétant le fichier `personnage.js`. Testez les méthodes dans la console.
 
-6. Il serait bon, de nouveau, de tester tout ça dans la console. Voici un exemple de code à insérer après tous les fichiers, et qui peut vous aider :
 
-		<script type="text/javascript">
-	       let eq1 = new Equipe("PSG");
-	       let eq2 = new Equipe("FCN");
-	       let eq3 = new Equipe("ASM");
-	       let eq4 = new Equipe("RCS");
-	       let eq5 = new Equipe("HAC");
-	       let eq6 = new Equipe("RCL");
-	       let eq7 = new Equipe("TFC");
-	       let eq8 = new Equipe("EAG");
-	       let chp = new Championnat(eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8);
-	    </script>
+## EXERCICE 5 - le scénario du jeu
 
-	Entrez ensuite dans la console les instructions suivantes :
+Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les divers objets, et organiser les gestions d’événements. Ce fichier possède déjà une fonction partiellement codée, et qui va gérer les événements clavier. 
 
-		chp.classer_equipes();
-		chp.afficher_classement();
-		chp.afficher_journee(1);
-		chp.jouer_journee(1);
-		chp.classer_equipes();
-		chp.afficher_classement();
-		chp.afficher_journee(2);
-		chp.jouer_journee(2);
-		chp.classer_equipes();
-		chp.afficher_classement();
+### Les variables globales : 
 
-	etc
+- créez la variable `aff` en lui affectant la balise `html` dont l’identifiant est "affichage" ;
+- créez la variable `msg` en lui affectant la balise `html` dont l’identifiant est "message" ;
+- créez la variable `xP` qui est l’abscisse du futur personnage et initialisez-la à une valeur aléatoire entre 1 et 20 ;
+- créez la variable `xT` qui est l’abscisse du futur trésor et initialisez-la à une valeur aléatoire entre 1 et 20 ;
+- créez une variable `P` et initialisez-la par un appel au constructeur de `Personnage`, avec comme paramètre `xP` ;
+- créez une variable `T` et initialisez-la par un appel au constrcuteur de `Tresor`, avec comme paramètre `xT` ;
+- créez une variable `proba` et donnez-lui une valeur entre 0 et 1 qui vous semble raisonnable. Cette valeur correspond à la probabilité qu’a une case du champ de mines d’être minée. Au besoin, vous pourrez ajuster cette valeur par la suite.
+- créez une variable `C` et initialisez-la par un appel au constructeur de `Champ`, avec comme paramètres les nombres `xP`, `xT` et `proba` ;
+- créez une variable `lien_rec` en lui affectant la balise dont l’identifiant est "rec" ;
+- donnez comme valeur de l’attribut `onclick` de `lien_rec` la fonction `go` que nous allons décrire juste après :
 
-7. Il pourrait être agréable d’avoir une disposition de table au niveau de la `<div id="titres">` et des `<div id="1">`, ..., `<div id="8">` pour avoir un bon affichage du classement (voir image plus haut). Si vous avez le temps, c’est le moment. C’est possible en incluant « brutalement » les balises adéquates au niveau des divers `innerHTML` rencontrés.  
 
+### La fonction go :
 
-## EXERCICE 5 - le scénario
+Cette fonction sera appelée pour lancer le jeu, mais aussi à chaque fois qu’on cliquera sur le lien « recommencer ». 
 
-Et maintenant, le scénario du déroulement du jeu. Vous pouvez supprimer les instructions tests utilisées précédemment (voir haut de cette page). Incluez le fichier scenario.js à la suite des 4 autres fichiers. Ce fichier sera une suite d’instructions. Pour le moment, il contient des déclarations de variables :
+il est possible que cela soit suite à une explosion, la carte des mines peut être affichée. Il faut donc coder la fonction `go` pour que : 
+- on commence par cacher cette carte ;
+- on initialise `P` avec comme paramètre `xP` ;
+- on initialise `T` avec comme paramètre `xT` ;
+- on indique la situation de `P` ;
+- enfin on met la page (le `<body>`) en écoute de l’événement `keydown`, avec comme fonction associée `gererClavier`.
 
-des variables qui font le lien avec l’interface html ;
-d’autres variables comme tabEq et chp;
-tabEq sert à remplir les input et la liste des équipes engagées avec des valeurs par défaut,
-chp prendra comme valeur un Championnat (plus tard).
 
-### État initial
+### La fonction gererClavier :
 
-1. Au début, certains éléments seront en `display : inline`, d’autres en `display :  none`. Tous ces styles sont amenés à passer d’un état à l’autre en fonctions d’événements clic divers, et ceci restera à programmer. 
+Cette fonction prend un paramètre `event`, comme dans les exemples du cours. 
 
-   Rappel: on peut accéder au `display` d’un élément `elt` par `elt.style.display = "…"`.
-
-   Programmez l’état d’affichage initial suivant :
-
-   + les `fieldsetJ` et `fieldsetC` sont en `display : none`.
-
-   + le `fieldsetE` doit être en `display : inline`.
-
-   + Parmi les enfants du `fieldsteE` :
-      - la `<div id="equipesEngagees">` sera en `display : inline`.
-      - la `<div id="listeEquipes">` sera en `display : none`.
-
-   + Dans la balise `legend` du `fieldsetE`, seule l’image « **plus** » est affichée, l’autre est en `display : none`.
-
-   + Quand on lancera le championnat, le `fieldsetC` deviendra visible. Il faut donc faire en sorte que dès à présent, le bouton `journee_suivante` soit caché, contrairement au bouton `jouer_journee`. Passez donc le `display` de `jj` à `inline` et celui de `js` à `none`.
-	
-2. Il faut aussi préremplir les input des noms d’équipes en cohérence avec la liste des équipes engagées par défaut. Autrement dit, il faut remplir ces `input` avec les valeurs du tableau `tabEq`. Programmez ceci.
-
-3. Enfin, pour compléter votre état initial, affectez au `innerHTML` de `ee` la valeur texte suivante :
-
-		"équipes engagées : PSG - ASM - OL - OM - FCN - ASSE - MHSC - EAG"
-
-   Programmez tout ceci et testez en rafraîchissant la page
-
-
-### Gestion des événements click
-
-4. On peut programmer la gestion d’un événement `click` de plusieurs façons (voir TD1). Dans notre cas, nous allons utiliser des « fonctions anonymes » :
-
-		pl.onclick = function() {
-		  pl.style.display = "none";
-		  mo.style.display = "inline";
-		  le.style.display = "inline";
-		  ee.style.display = "none";
-		}
-	
-   Dans le code précédent, on affecte à l’attribut `onclick` de `pl` une valeur de type fonction, qui ne porte pas de nom particulier, et dont le contenu permet d’agir sur le `display` d’éléments. Un code équivalent aurait été :
-
-		function reaction_au_clic_pl() {
-		  pl.style.display = "none";
-		  mo.style.display = "inline";
-		  le.style.display = "inline";
-		  ee.style.display = "none";
-		}
-
-		pl.onclick =  reaction_au_clic_pl ;
-
-   Mais comme cette fonction ne sert que là, on peut la passer en fonction anonyme sans problème.
-
-   Recopiez ce code, anticipez ce qui se passera quand on cliquera sur l’image `plus`. Actualisez la page et vérifiez que le comportement attendu se produit bien.
-
-5. On va maintenant gérer le clic sur l’image `moins`. Adaptez le code précédent pour programmer le comportement suivant, quand on clique sur le moins :
-
-	+ l’image `plus` doit réapparaître;
-
-	+ l’image `moins` doit disparaître;
-
-	+ la `<div id="listeEquipes">` doit disparaître ;
-
-	+ le `innerHTML` de la `<div id="equipesEngagees">` doit être recalculé pour afficher le même type de phrase que celle par défaut, mais cette fois ce sont les valeurs des `input` qui serviront ;
-
-	+ cette `<div id="equipesEngagees">` doit apparaître ;
-
-   Programmez tout ceci, actualisez la page et vérifiez que les comportements attendus sont opérationnels.
-
-6. Programmons l’action du bouton `lancer_championnat`.
-
-   Celui-ci doit :
-
-	+ appeler le constructeur de `Championnat`, les paramètres étant huit équipes construites à partir des 8 champs texte du `fieldsetE`. Vous utiliserez la variable globale `chp` déclarée au début :
-
-		chp = new Championnat(…);
-
-	+ classer ces équipes ;
-
-	+ afficher le classement ;
-
-	+ actualiser la balise `<legend id="numJ">` pour que son contenu soit de la forme « journée n°… » (utiliser l’attribut `numJournee` ) ;
-
-	+ afficher la journée correspondant à `numJournee` (c’est-à-dire afficher les 4 matchs) ;
-
-	+ passer `jj` en `display :  inline` et `js` en `display : none` ;
-
-	+ passer `fj` et `fc` en `display : inline`, `fe` en `display : none` ;
-
-	+ passer `lc` en `display : none` (pour éviter les relances maladroites du championnat)
-
-	Essayez de faire tout ça dans une fonction anonyme !
-
-7. Passons à l’action du bouton `jouer_journee`. Celui-ci doit :
-
-	+ faire jouer la journée d’indice `numJournee` ;
-
-	+ passer `jj` en `display : none` ;
-
-	+ si `numJournee` est inférieur à 14, passer `js` en `display : inline` (sinon, le championnat est terminé!) ;
-
-	+ classer les équipes ;
-
-	+ afficher le classement.
-
-	Pareil, fonction anonyme.
-
-
-8. Et pour finir, l’action de `journee_suivante`. Celui-ci doit :
-
-	+ augmenter `numJournee` d’une unité ;
-
-	+ afficher la journée correspondant à cette nouvelle valeur de `numJournee` ;
-
-	+ mettre à jour le contenu de la balise `numJ` ;
-
-	+ passser `jj` en `display : inline` et `js` en `display : none`.
-
-   Pareil, fonction anonyme.
-
-   Actualisez tout ça, et jouez !
-
-
+- complétez les `case` 37, 38, 39 et 40 qui représentent les 4 mouvements du personnage.
+- pour la touche "a", c’est plus compliqué :
+	+ on retire 50 au score de `P` ;
+	+ on indique sa nouvelle situation ;
+	+ on affiche la carte de `C` ;
+	+ une seconde après on cache cette carte.
+	+ ensuite, il faut compléter ce qu’on doit faire si le personnage met le pied sur une mine :
+		- on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
+		- on affiche la carte des mines ;
+		- on met à l’affichage « perdu !!! ».
+	+ enfin, il faut compléter ce qu’on doit faire si le personnage trouve le trésor :
+		- on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
+		- on met à l’affichage « gagné !!! ».
+
+Et pour finir, après tout ce code, il reste à appeler la fonction `go` par l’instruction `go()` ;
+
+Et c’est tout !!!
 
