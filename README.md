@@ -66,33 +66,25 @@ Codez cette classe Element en complétant le fichier `element.js`.
 
 Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pourrez en console tester les commandes suivantes :
 
-
-<style type="text/css">
-	.cadre {
-		border:solid 1px black;
-	}
-</style>
-
 <p align="center" >
    <img class="cadre" src="ressources/img3.png">
 </p>
-
 
 
 ## EXERCICE 2 - la classe Tresor
 
 Un objet `Tresor` est un objet très simple. Il n’est pas amené à se déplacer. On prévoiera seulement comme méthodes :
 
-+ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe Element. Il n’y a besoin que d’un paramètre x (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre name sera l’identifant de la balise qui sera naturellement associée au trésor.
++ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre name sera l’identifant de la balise qui sera naturellement associée au trésor.
 
-initialiser(x), qui évoque la méthode initialiser de la classe Element. A vous de trouver avec quels paramètres on évoque cette méthode.
++ `initialiser(x)`, qui évoque la méthode initialiser de la classe `Element`. A vous de trouver avec quels paramètres on évoque cette méthode.
 
-Codez cette classe Tresor en complétant le fichier tresor.js. Testez les méthodes dans la console.
+Codez cette classe `Tresor` en complétant le fichier `tresor.js`. Testez les méthodes dans la console.
 
 Remarques :
  
-vous ferez appel au super-constructeur dans constructor(x) ;
-vous ferez appel à la méthode mère initialiser de Element dans initialiser(x).
+vous ferez appel au super-constructeur dans `constructor(x)` ;
+vous ferez appel à la méthode mère `initialiser` de `Element` dans `initialiser(x)`.
 
 ## EXERCICE 3 - l'objet Journee
 
