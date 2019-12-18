@@ -115,7 +115,7 @@ Un objet `Champ` aura 3 méthodes :
 
 	- nettoyer un peu `this.carte`. Pour cela affectez de force 0 aux cases de `this.carte` correspondant aux proximités immédiates du trésor et du personnage. Le trésor ne doit pas être miné, ni sa proximité immédiate, ni celle de la position initiale du personnage.
 
-	Remarque : RIEN ne garantit qu’il existe un chemin possible vers le trésor. Il y a une forte probabilité, certainement fastidieuse à calculer, qu’au moins un chemin victorieux existe.
+	Remarque : RIEN ne garantit qu’il existe un chemin possible vers le trésor. La probabilité qu’au moins un chemin victorieux existe dépend bien sûr du paramètre `proba`, et on peut penser que plus `proba` est faible, plus cette probabilité d'avoir au moins un chemin vers le trésor est importante.
 
 	- Affecter à `this.balise_div` la bonne balise `html`.
 
