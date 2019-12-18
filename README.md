@@ -131,6 +131,15 @@ Pour les méthodes `afficher()` et `cacher()`, vous pourrez utiliser :
 	- `appendChild`
 	- `removeChild`
 
+Réactualisez la page, et testez votre code : 
+
+
+        let c = new Champ(5,12,0.15);
+        c.afficher();
+        c.cacher();
+
+
+
 
 ## EXERCICE 4 - la classe Personnage
 
