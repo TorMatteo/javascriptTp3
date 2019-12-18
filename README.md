@@ -192,14 +192,15 @@ Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les di
 - créez une variable `T` et initialisez-la par un appel au constrcuteur de `Tresor`, avec comme paramètre `xT` ;
 - créez une variable `proba` et donnez-lui une valeur entre 0 et 1 qui vous semble raisonnable. Cette valeur correspond à la probabilité qu’a une case du champ de mines d’être minée. Au besoin, vous pourrez ajuster cette valeur par la suite.
 - créez une variable `C` et initialisez-la par un appel au constructeur de `Champ`, avec comme paramètres les nombres `xP`, `xT` et `proba` ;
-- sans modifier, le code html, définissez l'attribut `onclick` de la balise dont l’identifiant est "rec" en lui donnant comme valeur la fonction `go` que nous allons décrire juste après :
+- sans modifier le code html, définissez l'attribut `onclick` de la balise dont l’identifiant est "rec" en lui donnant comme valeur la fonction `go` que nous allons décrire juste après :
 
 
 ### La fonction go :
 
 Cette fonction sera appelée pour lancer le jeu, mais aussi à chaque fois qu’on cliquera sur le lien « recommencer ». 
 
-il est possible que cela soit suite à une explosion, la carte des mines peut être affichée. Il faut donc coder la fonction `go` pour que : 
+il est possible que cela soit suite à une explosion, la carte des mines peut donc être affichée au moment où on clique sur le lien. Il faut donc coder la fonction `go` pour que :
+ 
 - on commence par cacher cette carte ;
 - on initialise `P` avec comme paramètre `xP` ;
 - on initialise `T` avec comme paramètre `xT` ;
