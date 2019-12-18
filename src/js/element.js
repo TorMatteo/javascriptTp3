@@ -4,11 +4,11 @@ class Element {
 		// à compléter
 	}
 
-	initialiser(x,y,name) {
+	initialiser(x,y,str) {
 		// à compléter
 	}
 
-	setSprite(name) {
+	setSprite(str) {
 		// à compléter
 	}
 
