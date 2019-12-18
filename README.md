@@ -109,9 +109,9 @@ Un objet `Champ` aura 3 méthodes :
 
 	On pourra considérer `this.carte` comme un tableau de 20 lignes, chacune des lignes étant un tableau de 20 cases. Chacune des 400 cases sera remplie soit avec un 0 soit avec un 1, en fonction du tirage d’un nombre aléatoire classique entre 0 et 1. 
 
-	On pourra décider que si ce nombre aléatoire est inférieur au paramètre proba, alors on insère un 1 (= une mine) et sinon un 0 (= pas de mine). 
+	On pourra décider que si ce nombre aléatoire est inférieur au paramètre `proba`, alors on insère un 1 (= une mine) et sinon un 0 (= pas de mine). 
 
-	N’oubliez pas la méthode push des tableaux en JavaScript (voir Cours 1). 
+	N’oubliez pas la méthode push des tableaux en JavaScript. 
 
 	- nettoyer un peu `this.carte`. Pour cela affectez de force 0 aux cases de `this.carte` correspondant aux proximités immédiates du trésor et du personnage. Le trésor ne doit pas être miné, ni sa proximité immédiate, ni celle de la position initiale du personnage.
 
