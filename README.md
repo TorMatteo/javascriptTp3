@@ -69,6 +69,8 @@ Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour 
 
         let T = new Element(5,1,'tresor');
         T.placer();
+        let P = new Element(12,20,'personnage');
+        P.placer();
 
 
 ## EXERCICE 2 - la classe Tresor
