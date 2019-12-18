@@ -8,7 +8,7 @@ class Element {
 		// à compléter
 	}
 
-	setSprite(str) {
+	setSrc(str) {
 		// à compléter
 	}
 

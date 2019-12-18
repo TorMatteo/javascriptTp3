@@ -51,7 +51,7 @@ On prévoit les méthodes suivantes :
 
 + `constructor(x,y,id)`, qui construit un nouvel `Element`, de coordonnées `x` et `y`, et de `sprite` la balise `html` dont l’identifiant est le paramètre `id`.
 
-+ `setSprite(str)`, qui met à jour le `src` du `sprite` en lui donnant la valeur du paramètre `str`.
++ `setSrc(str)`, qui met à jour le `src` du `sprite` en lui donnant la valeur du paramètre `str`.
 
 + `initialiser(x,y,str)`, qui donne aux attributs `coordX` et `coordY` les valeurs des paramètres `x` et `y`, puis agit aussi sur l’attribut `src` du `sprite` de l’`Element` en lui donnant la valeur du paramètre `str` par l’appel de `setSprite`, et enfin place l’`Element` (en appelant la méthode place décrite juste après).
 
@@ -67,14 +67,8 @@ Codez cette classe Element en complétant le fichier `element.js`.
 Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pourrez en console tester les commandes suivantes :
 
 
-
         let T = new Element(5,1,'tresor');
         T.placer();
-
-
-<p align="center" >
-   <img class="cadre" src="ressources/img3.png">
-</p>
 
 
 ## EXERCICE 2 - la classe Tresor
