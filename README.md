@@ -177,6 +177,9 @@ Codez cette classe `Personnage` en complétant le fichier `personnage.js`. Teste
 		etc
 
 
+Dans le jeu, il y aura des variables globales P, T, C. On pourrait coder le jeu en utilisant, au coeur des méthodes, ces variables globales. On peut aussi adopter le point de vue de les passer en paramètres à des méthodes qui gèrent un Tresor, un Personnage ou un Champ de manière générique. C'est le point de vue adopté ici.
+
+
 ## EXERCICE 5 - le scénario du jeu
 
 Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les divers objets, et organiser les gestions d’événements. Ce fichier possède déjà une fonction partiellement codée, et qui va gérer les événements clavier. 
