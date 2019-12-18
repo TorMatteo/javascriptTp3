@@ -169,12 +169,12 @@ Codez cette classe `Personnage` en complétant le fichier `personnage.js`. Teste
 		let T = new Tresor(xT);
 		let P = new Personnage(xP);
 		let C = new Champ(xT,xP,proba);
-        T.placer();
-        P.placer();
-        C.afficher();
-        P.mouvement(-1,0);
-        P.actualiser_situation(C);
-        etc
+		T.placer();
+		P.placer();
+		C.afficher();
+		P.mouvement(-1,0);
+		P.actualiser_situation(C);
+		etc
 
 
 ## EXERCICE 5 - le scénario du jeu
