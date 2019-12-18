@@ -68,14 +68,8 @@ Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour 
 
 
 
-        <nav>
-          <ul>
-            <li><a href="#" onclick="adapter_galerie('rose');">rose</a></li>
-            <li><a href="#" onclick="adapter_galerie('hortensia');">hortensia</a></li>
-            <li><a href="#" onclick="adapter_galerie('fruitier');">fruitier</a></li>
-            <li><a href="#" onclick="adapter_galerie('autre');">autre</a></li>
-          </ul>
-        </nav>
+        let T = new Element(5,1,'tresor');
+        T.placer();
 
 
 <p align="center" >
