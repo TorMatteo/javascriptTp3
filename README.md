@@ -153,9 +153,9 @@ Un objet `Personnage` est plus complexe qu’un objet `Tresor`. Tout d’abord i
 
 + `nbProxMines(C)`, qui retourne le nombre de mines à proximité du personnage `this`, mines qui sont répertoriées dans `C.carte`. On aurait pu se passer du paramètre Champ `C` en considérant que c’est une variable globale, mais c’est un autre point de vue.
 
-+ `indiquer_situation()`, qui calcule le nombre de mines à proximité de `this`, puis l’affiche dans la balise « affichage ». Cette méthode affiche aussi le `score` de `this` dans la balise « message ». Enfin, elle met à jour le `sprite` de `this` : si le nombre de mines à proximité est 0, c’est le sourire, sinon c’est la grimace.
++ `indiquer_situation(C)`, qui calcule le nombre de mines à proximité de `this` en référence au champ de mines `C`, puis l’affiche dans la balise « affichage ». Cette méthode affiche aussi le `score` de `this` dans la balise « message ». Enfin, elle met à jour le `sprite` de `this` : si le nombre de mines à proximité est 0, c’est le sourire, sinon c’est la grimace.
 
-+ `mouvement(dx,dy)`, qui ajoute (si c’est possible ! => à tester) `dx` à `coordX` et `dy` à `coordY`. Quand ces additions sont possibles, il faudra aussi placer le personnage, diminuer son score d’une unité et indiquer sa situation.
++ `mouvement(dx,dy)`, qui ajoute (si c’est possible ! => à tester) `dx` à `coordX` et `dy` à `coordY`. Quand ces additions sont possibles, il faudra aussi placer le personnage, diminuer son score d’une unité.
 
 + `trouve(T)`, qui retourne un booléen disant si le personnage est arrivé au trésor `T` passé en paramètre.
 
