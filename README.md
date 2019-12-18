@@ -167,8 +167,8 @@ Codez cette classe `Personnage` en complétant le fichier `personnage.js`. Teste
 		let xP = 12;
 		let proba = 0.15;
 		let T = new Tresor(xT);
-        let P = new Personnage(xP);
-        let C = new Champ(xT,xP,proba);
+		let P = new Personnage(xP);
+		let C = new Champ(xT,xP,proba);
         T.placer();
         P.placer();
         C.afficher();
