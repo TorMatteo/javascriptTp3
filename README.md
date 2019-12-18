@@ -186,16 +186,13 @@ Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les di
 
 ### Les variables globales : 
 
-- créez la variable `aff` en lui affectant la balise `html` dont l’identifiant est "affichage" ;
-- créez la variable `msg` en lui affectant la balise `html` dont l’identifiant est "message" ;
 - créez la variable `xP` qui est l’abscisse du futur personnage et initialisez-la à une valeur aléatoire entre 1 et 20 ;
 - créez la variable `xT` qui est l’abscisse du futur trésor et initialisez-la à une valeur aléatoire entre 1 et 20 ;
 - créez une variable `P` et initialisez-la par un appel au constructeur de `Personnage`, avec comme paramètre `xP` ;
 - créez une variable `T` et initialisez-la par un appel au constrcuteur de `Tresor`, avec comme paramètre `xT` ;
 - créez une variable `proba` et donnez-lui une valeur entre 0 et 1 qui vous semble raisonnable. Cette valeur correspond à la probabilité qu’a une case du champ de mines d’être minée. Au besoin, vous pourrez ajuster cette valeur par la suite.
 - créez une variable `C` et initialisez-la par un appel au constructeur de `Champ`, avec comme paramètres les nombres `xP`, `xT` et `proba` ;
-- créez une variable `lien_rec` en lui affectant la balise dont l’identifiant est "rec" ;
-- donnez comme valeur de l’attribut `onclick` de `lien_rec` la fonction `go` que nous allons décrire juste après :
+- sans modifier, le code html, définissez l'attribut `onclick` de la balise dont l’identifiant est "rec" en lui donnant comme valeur la fonction `go` que nous allons décrire juste après :
 
 
 ### La fonction go :
