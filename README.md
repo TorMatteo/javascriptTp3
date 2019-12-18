@@ -66,6 +66,18 @@ Codez cette classe Element en complétant le fichier `element.js`.
 
 Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pourrez en console tester les commandes suivantes :
 
+
+
+        <nav>
+          <ul>
+            <li><a href="#" onclick="adapter_galerie('rose');">rose</a></li>
+            <li><a href="#" onclick="adapter_galerie('hortensia');">hortensia</a></li>
+            <li><a href="#" onclick="adapter_galerie('fruitier');">fruitier</a></li>
+            <li><a href="#" onclick="adapter_galerie('autre');">autre</a></li>
+          </ul>
+        </nav>
+
+
 <p align="center" >
    <img class="cadre" src="ressources/img3.png">
 </p>
