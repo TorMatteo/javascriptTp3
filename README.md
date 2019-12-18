@@ -88,6 +88,13 @@ Remarques :
 vous ferez appel au super-constructeur dans `constructor(x)` ;
 vous ferez appel à la méthode mère `initialiser` de `Element` dans `initialiser(x)`.
 
+Réactualisez la page, et testez votre code : 
+
+
+        let T = new Tresor(5);
+        T.placer();
+
+
 ## EXERCICE 3 - la classe Champ
 
 Avant de coder la classe `Personnage`, qui hérite aussi de la classe `Element`, on va coder la classe `Champ` car `Personnage` utilise dans certaines de ses méthodes un objet `Champ`.
