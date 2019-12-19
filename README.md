@@ -202,8 +202,8 @@ Cette fonction sera appelée pour lancer le jeu, mais aussi à chaque fois qu’
 il est possible que cela soit suite à une explosion, la carte des mines peut donc être affichée au moment où on clique sur le lien. Il faut donc coder la fonction `go` pour que :
  
 - on commence par cacher cette carte ;
-- on initialise `P` avec comme paramètre `xP` ;
-- on initialise `T` avec comme paramètre `xT` ;
+- on initialise `P` avec comme paramètre `xP`, et on le place ;
+- on initialise `T` avec comme paramètre `xT`, et on le place ;
 - on indique la situation de `P` ;
 - enfin on met la page (le `<body>`) en écoute de l’événement `keydown`, avec comme fonction associée `gererClavier`.
 
