@@ -45,7 +45,7 @@ On définit un `Element` par les attributs suivants :
 
 - `coordY`, nombre qui représente l’ordonnée de l’élément. La ligne du haut (celle du trésor) correspondra à `coordY = 1` et la ligne du bas (d’où partira le personnage) correspondra à `coordY = 20`.
 
-- `sprite`, qui correspond à la balise `html` liée à cet élément. On pourrait aussi choisir de dissocier complètement les balises  `html` des objets `Element` qui leur sont intuitivement associés.
+- `sprite`, qui correspond à la balise `html` liée à cet élément.
 
 On prévoit les méthodes suivantes :
 
@@ -53,7 +53,7 @@ On prévoit les méthodes suivantes :
 
 + `setSrc(str)`, qui met à jour le `src` du `sprite` en lui donnant la valeur du paramètre `str`.
 
-+ `initialiser(x,y,str)`, qui donne aux attributs `coordX` et `coordY` les valeurs des paramètres `x` et `y`, puis agit aussi sur l’attribut `src` du `sprite` de l’`Element` en lui donnant la valeur du paramètre `str` par l’appel de `setSprite`, et enfin place l’`Element` (en appelant la méthode place décrite juste après).
++ `initialiser(x,y,str)`, qui donne aux attributs `coordX` et `coordY` les valeurs des paramètres `x` et `y`, puis agit aussi sur l’attribut `src` du `sprite` de l’`Element` en lui donnant la valeur du paramètre `str` par l’appel de `setSrc`, et enfin place l’`Element` (en appelant la méthode place décrite juste après).
 
 + `placer()`, qui positionne le `sprite` en ajustant son `top` et son `left` en fonction des coordonnées de l’Element. 
 Il faudra donc modifier la valeur de `this.sprite.style.top` et de `this.sprite.style.left`. Le mode de calcul sera à mettre en place. Testez vos formules en console. Comme indications, chaque case de l’image de fond est un carré de 20 px de côté et le quadrillage est décalé de 51 px des bords de l’écran, comme indiqué ci-dessous. Les valeurs à attribuer à `this.sprite.style.top` et `this.sprite.style.left` seront donc construites à partir de `this.coordX`, `this.coordY`, et des nombres 51 et 20.
@@ -77,7 +77,7 @@ Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour 
 
 Un objet `Tresor` est un objet très simple. Il n’est pas amené à se déplacer. On prévoiera seulement comme méthodes :
 
-+ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre name sera l’identifant de la balise qui sera naturellement associée au trésor.
++ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre `id` sera l’identifant de la balise qui sera naturellement associée au trésor.
 
 + `initialiser(x)`, qui évoque la méthode initialiser de la classe `Element`. A vous de trouver avec quels paramètres on évoque cette méthode.
 
@@ -134,9 +134,9 @@ Pour les méthodes `afficher()` et `cacher()`, vous pourrez utiliser :
 Réactualisez la page, et testez votre code : 
 
 
-        let c = new Champ(5,12,0.15);
-        c.afficher();
-        c.cacher();
+        let C = new Champ(5,12,0.15);
+        C.afficher();
+        C.cacher();
 
 
 
@@ -151,7 +151,7 @@ Un objet `Personnage` est plus complexe qu’un objet `Tresor`. Tout d’abord i
 
 + `initialiser(x)`, qui évoque la méthode `initialiser` de la classe `Element`. A vous de trouver avec quels paramètres on évoque cette méthode. Il faudra aussi réinitialiser le `score` du personnage à 200. Ceci servira quand on recommence le même parcours après avoir perdu la partie. Même remarque que pour `Tresor` (`super.initialiser`).
 
-+ `nbProxMines(C)`, qui retourne le nombre de mines à proximité du personnage `this`, mines qui sont répertoriées dans `C.carte`. On aurait pu se passer du paramètre Champ `C` en considérant que c’est une variable globale, mais c’est un autre point de vue.
++ `nbProxMines(C)`, qui retourne le nombre de mines à proximité du personnage `this`, mines qui sont répertoriées dans `C.carte`.
 
 + `indiquer_situation(C)`, qui calcule le nombre de mines à proximité de `this` en référence au champ de mines `C`, puis l’affiche dans la balise « affichage ». Cette méthode affiche aussi le `score` de `this` dans la balise « message ». Enfin, elle met à jour le `sprite` de `this` : si le nombre de mines à proximité est 0, c’est le sourire, sinon c’est la grimace.
 
