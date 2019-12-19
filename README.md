@@ -215,16 +215,16 @@ Cette fonction prend un paramètre `event`, comme dans les exemples du cours.
 - complétez les `case` 37, 38, 39 et 40 qui représentent les 4 mouvements du personnage.
 - pour la touche "a", c’est plus compliqué :
 	+ on retire 50 au score de `P` ;
-	+ on indique sa nouvelle situation ;
 	+ on affiche la carte de `C` ;
 	+ une seconde après on cache cette carte.
-	+ ensuite, il faut compléter ce qu’on doit faire si le personnage met le pied sur une mine :
-		- on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
-		- on affiche la carte des mines ;
-		- on met à l’affichage « perdu !!! ».
-	+ enfin, il faut compléter ce qu’on doit faire si le personnage trouve le trésor :
-		- on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
-		- on met à l’affichage « gagné !!! ».
+- puis on indique la nouvelle situation de `P` ;
+- ensuite, il faut compléter ce qu’on doit faire si le personnage met le pied sur une mine :
+	+ on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
+	+ on affiche la carte des mines ;
+	+ on met à l’affichage « perdu !!! ».
+- enfin, il faut compléter ce qu’on doit faire si le personnage trouve le trésor :
+	+ on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
+	+ on met à l’affichage « gagné !!! ».
 
 Et pour finir, après tout ce code, il reste à appeler la fonction `go` par l’instruction `go()` ;
 
