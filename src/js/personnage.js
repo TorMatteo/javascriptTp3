@@ -12,7 +12,7 @@ class Personnage extends Element {
 		// à compléter
 	}
 
-	indiquer_situation() {
+	indiquer_situation(C) {
 		// à compléter
 	}
 
