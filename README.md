@@ -23,7 +23,7 @@ A tout moment, il sera prévenu du nombre de mines qu’il a à proximité immé
    <img src="ressources/img1.png">
 </p>
 
-S’il arrive au trésor, ou s’il marche sur une mine, ou enfin s’il atteint le trésor, alors un message donne l’information et le jeu est arrêté.
+S’il arrive au trésor, ou s’il marche sur une mine, un message donne l’information et le jeu est arrêté.
 
 Vous utiliserez dans ce TD les objets JavaScript suivants :
 
