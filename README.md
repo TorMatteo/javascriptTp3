@@ -75,9 +75,9 @@ Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour 
 
 ## EXERCICE 2 - la classe Tresor
 
-Un objet `Tresor` est un objet très simple. Il n’est pas amené à se déplacer. On prévoiera seulement comme méthodes :
+Un objet `Tresor` est un objet très simple. Il n’est pas amené à se déplacer. On prévoira seulement comme méthodes :
 
-+ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre `id` sera l’identifant de la balise qui sera naturellement associée au trésor.
++ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre `id` sera l'identifiant de la balise qui sera naturellement associée au trésor.
 
 + `initialiser(x)`, qui invoque la méthode initialiser de la classe `Element`. A vous de trouver avec quels paramètres on invoque cette méthode.
 
@@ -147,7 +147,7 @@ Un objet `Personnage` est plus complexe qu’un objet `Tresor`. Tout d’abord i
 
 **Méthodes à prévoir :**
 
-+ `constructor(x)`, qui construit le personnage en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera placé le personnage au début) puisque la ligne est obligatoirement celle du bas (ligne 20), et le paramètre name sera l’identifant de la balise qui sera naturellement associée au personnage. Même remarque que pour `Tresor` (super-constructeur).
++ `constructor(x)`, qui construit le personnage en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera placé le personnage au début) puisque la ligne est obligatoirement celle du bas (ligne 20), et le paramètre name sera l'identifiant de la balise qui sera naturellement associée au personnage. Même remarque que pour `Tresor` (super-constructeur).
 
 + `initialiser(x)`, qui invoque la méthode `initialiser` de la classe `Element`. A vous de trouver avec quels paramètres on invoque cette méthode. Il faudra aussi réinitialiser le `score` du personnage à 200. Ceci servira quand on recommence le même parcours après avoir perdu la partie. Même remarque que pour `Tresor` (`super.initialiser`).
 
@@ -189,7 +189,7 @@ Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les di
 - créez la variable `xP` qui est l’abscisse du futur personnage et initialisez-la à une valeur aléatoire entre 1 et 20 ;
 - créez la variable `xT` qui est l’abscisse du futur trésor et initialisez-la à une valeur aléatoire entre 1 et 20 ;
 - créez une variable `P` et initialisez-la par un appel au constructeur de `Personnage`, avec comme paramètre `xP` ;
-- créez une variable `T` et initialisez-la par un appel au constrcuteur de `Tresor`, avec comme paramètre `xT` ;
+- créez une variable `T` et initialisez-la par un appel au constructeur de `Tresor`, avec comme paramètre `xT` ;
 - créez une variable `proba` et donnez-lui une valeur entre 0 et 1 qui vous semble raisonnable. Cette valeur correspond à la probabilité qu’a une case du champ de mines d’être minée. Au besoin, vous pourrez ajuster cette valeur par la suite.
 - créez une variable `C` et initialisez-la par un appel au constructeur de `Champ`, avec comme paramètres les nombres `xP`, `xT` et `proba` ;
 - sans modifier le code html, définissez l'attribut `onclick` de la balise dont l’identifiant est "rec" en lui donnant comme valeur la fonction `go` que nous allons décrire juste après :
