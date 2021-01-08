@@ -85,8 +85,8 @@ Codez cette classe `Tresor` en complétant le fichier `tresor.js`. Testez les m�
 
 Remarques :
  
-vous ferez appel au super-constructeur dans `constructor(x)` ;
-vous ferez appel à la méthode mère `initialiser` de `Element` dans `initialiser(x)`.
+vous ferez appel au super-constructeur `super` dans `constructor(x)` ;
+vous ferez appel à la méthode mère `super.initialiser` de `Element` dans `initialiser(x)`.
 
 Réactualisez la page, et testez votre code : 
 
