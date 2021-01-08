@@ -173,7 +173,7 @@ Codez cette classe `Personnage` en complétant le fichier `personnage.js`. Teste
 		P.placer();
 		C.afficher();
 		P.mouvement(-1,0);
-		P.actualiser_situation(C);
+		P.indiquer_situation(C);
 		etc
 
 
