@@ -79,7 +79,7 @@ Un objet `Tresor` est un objet très simple. Il n’est pas amené à se déplac
 
 + `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre `id` sera l’identifant de la balise qui sera naturellement associée au trésor.
 
-+ `initialiser(x)`, qui évoque la méthode initialiser de la classe `Element`. A vous de trouver avec quels paramètres on évoque cette méthode.
++ `initialiser(x)`, qui invoque la méthode initialiser de la classe `Element`. A vous de trouver avec quels paramètres on invoque cette méthode.
 
 Codez cette classe `Tresor` en complétant le fichier `tresor.js`. Testez les méthodes dans la console.
 
@@ -105,7 +105,7 @@ Un objet `Champ` aura 3 méthodes :
 
 + `constructor(xP,xT,proba)`, qui prend plusieurs étapes :
 
-	- créer `this.carte`, qui est un tableau matérialisant 20 lignes et 20 colonnes. Les paramètres `xP` et `xT` désignent les `coordX` initiales du trésor et du personnage. 
+	- créer `this.carte`, qui est un tableau matérialisant 20 lignes et 20 colonnes. Les paramètres `xP` et `xT` désignent les `coordX` initiales du personnage et du trésor. 
 
 	On pourra considérer `this.carte` comme un tableau de 20 lignes, chacune des lignes étant un tableau de 20 cases. Chacune des 400 cases sera remplie soit avec un 0 soit avec un 1, en fonction du tirage d’un nombre aléatoire classique entre 0 et 1. 
 
@@ -149,7 +149,7 @@ Un objet `Personnage` est plus complexe qu’un objet `Tresor`. Tout d’abord i
 
 + `constructor(x)`, qui construit le personnage en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera placé le personnage au début) puisque la ligne est obligatoirement celle du bas (ligne 20), et le paramètre name sera l’identifant de la balise qui sera naturellement associée au personnage. Même remarque que pour `Tresor` (super-constructeur).
 
-+ `initialiser(x)`, qui évoque la méthode `initialiser` de la classe `Element`. A vous de trouver avec quels paramètres on évoque cette méthode. Il faudra aussi réinitialiser le `score` du personnage à 200. Ceci servira quand on recommence le même parcours après avoir perdu la partie. Même remarque que pour `Tresor` (`super.initialiser`).
++ `initialiser(x)`, qui invoque la méthode `initialiser` de la classe `Element`. A vous de trouver avec quels paramètres on invoque cette méthode. Il faudra aussi réinitialiser le `score` du personnage à 200. Ceci servira quand on recommence le même parcours après avoir perdu la partie. Même remarque que pour `Tresor` (`super.initialiser`).
 
 + `nbProxMines(C)`, qui retourne le nombre de mines à proximité du personnage `this`, mines qui sont répertoriées dans `C.carte`.
 
