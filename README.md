@@ -1,4 +1,4 @@
-# ![](ressources/logo.jpeg) Prog web client riche - JavaScript 
+# ![](ressources/logo.jpeg) Prog web client riche - JavaScript
 
 ### IUT Montpellier-Sète – Département Informatique
 
@@ -7,17 +7,15 @@
 
 Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD3, votre fork privé du TD3 (**attention, pas de fork à la main !**):
 
-https://classroom.github.com/a/jziQocZu
-
-la version [pdf](ressources/td3.pdf)
+<!-- https://classroom.github.com/a/jziQocZu -->
 
 ## INTRODUCTION
 
-L’objectif de ce TD est de développer un jeu de champ de mines, où un personnage (représenté par un smiley) doit se déplacer sur un carré de 20 lignes et 20 colonnes pour atteindre un trésor (représenté par un coffre), en évitant un certain nombre de mines qui auront été déposées aléatoirement sur le terrain. 
+L’objectif de ce TD est de développer un jeu de champ de mines, où un personnage (représenté par un smiley) doit se déplacer sur un carré de 20 lignes et 20 colonnes pour atteindre un trésor (représenté par un coffre), en évitant un certain nombre de mines qui auront été déposées aléatoirement sur le terrain.
 Le personnage peut se déplacer avec les touches haut, bas, gauche et droite sur le terrain. Il ne peut pas en sortir.
 Il est initialement placé sur une case aléatoire de la ligne du bas et le trésor est placé sur une case aléatoire de la ligne du haut. Il commence la partie avec un score de 200 points. Ce score est dégressif : chaque pas lui fait perdre un point.
 
-A tout moment, il sera prévenu du nombre de mines qu’il a à proximité immédiate (à sa gauche, droite, devant ou derrière lui, mais pas celles placées en diagonale, inaccessibles en un pas).
+À tout moment, il sera prévenu du nombre de mines qu’il a à proximité immédiate (à sa gauche, droite, devant ou derrière lui, mais pas celles placées en diagonale, inaccessibles en un pas).
 
 <p align="center">
    <img src="ressources/img1.png">
@@ -25,208 +23,145 @@ A tout moment, il sera prévenu du nombre de mines qu’il a à proximité immé
 
 S’il arrive au trésor, ou s’il marche sur une mine, un message donne l’information et le jeu est arrêté.
 
-Vous utiliserez dans ce TD les objets JavaScript suivants :
-
-- un objet Personnage, associé à la balise `<img id="personnage">`
-- un objet Tresor, associé à la balise `<img id="tresor">`
-- un objet Champ, associé à la balise `<div id="carteMines">` 
-
-Les classes Personnage et Tresor héritent d’une classe `Element` qui regroupe les attributs et méthodes en commun.
-
 Les fichiers `jeu.html` et `jeu.css` constituent une base de travail, ainsi que les images fournies. Vous testerez, dans la console, les méthodes que vous coderez.
 
-## EXERCICE 1 - la classe Element
+## EXERCICE 1 - La classe `Element`
 
-La classe `Element` aura deux classes filles : `Tresor` et `Personnage`. Il n’y aura donc pas d’objet `Element` proprement dit, mais un `Personnage` et un `Tresor`.
+Vous utiliserez dans ce TD des objets des classes `Personnage`, `Tresor` et `Mine`. Ces trois classes héritent d'une classe `Element` qui regroupe les attributs et méthodes en commun.
+Il n’y aura donc pas d’objet `Element` proprement dit, mais un `Personnage`, un `Tresor` et des `Mine`.
 
 On définit un `Element` par les attributs suivants :
 
-- `coordX`, nombre qui représente l’abscisse de l’élément dans le terrain. Partons du principe que la première colonne (la plus à gauche) correspond à `coordX = 1`, et la dernière colonne à `coordX = 20`.
-
-- `coordY`, nombre qui représente l’ordonnée de l’élément. La ligne du haut (celle du trésor) correspondra à `coordY = 1` et la ligne du bas (d’où partira le personnage) correspondra à `coordY = 20`.
-
-- `sprite`, qui correspond à la balise `html` liée à cet élément.
+- 0 &le; `ligne` < 20, qui représente le numéro de la ligne de l’élément dans le terrain. Partons du principe que `ligne = 0` correspond à la ligne du haut (celle du trésor) et `ligne = 19` correspond à la ligne du bas (celle du départ du personnage).
+- 0 &le; `colonne` < 20, nombre qui représente le numéro de la colonne de l'élément. La colonne de gauche est `colonne = 0`.
+- `spriteElement`, qui correspond à une balise `<img>` qui permettra d'afficher une image pour l'élément.
 
 On prévoit les méthodes suivantes :
 
-+ `constructor(x,y,id)`, qui construit un nouvel `Element`, de coordonnées `x` et `y`, et de `sprite` la balise `html` dont l’identifiant est le paramètre `id`.
++ `constructor(ligne, colonne, spriteURL)` qui 
+  1. recopie `ligne` et `colonne` ;
+  1. stocke dans `spriteElement` une balise `<img>` (que vous créerez avec une méthode du [Cours 2](https://github.com/IUTInfoMontp-M4103C/Cours/raw/master/ressources/pdf/Cours2-JS-2020.pdf))<!-- `createElement` -->, qui aura la classe CSS `element` et dont l'adresse de l'image sera `spriteURL` (quel attribut de `<img>` utiliser ?)<!-- `src` --> ;
+  1. appelle la future méthode `placer(ligne, colonne)`.  
 
-+ `setSrc(str)`, qui met à jour le `src` du `sprite` en lui donnant la valeur du paramètre `str`.
+    **Remarque :** La balise n'est pas insérée dans la page Web et donc ne s'affiche pas pour l'instant.
 
-+ `initialiser(x,y,str)`, qui donne aux attributs `coordX` et `coordY` les valeurs des paramètres `x` et `y`, puis agit aussi sur l’attribut `src` du `sprite` de l’`Element` en lui donnant la valeur du paramètre `str` par l’appel de `setSrc`, et enfin place l’`Element` (en appelant la méthode place décrite juste après).
++ `placer(ligne, colonne)` qui met à jour les attributs `ligne` et `colonne`, et positionne le `spriteElement` en ajustant son `top` et son `left`.
+  Il faudra donc modifier la valeur de `this.spriteElement.style.top` et de `this.spriteElement.style.left`, par exemple `this.spriteElement.style.top=13px`. Chaque case de l’image de fond est un carré de `20px` de côté et le quadrillage est décalé de `51px` des bords de l’écran, comme indiqué ci-dessous. Le mode de calcul sera à mettre en place.
 
-+ `placer()`, qui positionne le `sprite` en ajustant son `top` et son `left` en fonction des coordonnées de l’Element. 
-Il faudra donc modifier la valeur de `this.sprite.style.top` et de `this.sprite.style.left`. Le mode de calcul sera à mettre en place. Testez vos formules en console. Comme indications, chaque case de l’image de fond est un carré de 20 px de côté et le quadrillage est décalé de 51 px des bords de l’écran, comme indiqué ci-dessous. Les valeurs à attribuer à `this.sprite.style.top` et `this.sprite.style.left` seront donc construites à partir de `this.coordX`, `this.coordY`, et des nombres 51 et 20.
-
-<p align="center">
-   <img src="ressources/img2.png">
-</p>
-
-Codez cette classe Element en complétant le fichier `element.js`.
-
-Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pourrez en console tester les commandes suivantes :
-
-
-        let T = new Element(5,1,'tresor');
-        T.placer();
-        let P = new Element(12,20,'personnage');
-        P.placer();
-
-
-## EXERCICE 2 - la classe Tresor
-
-Un objet `Tresor` est un objet très simple. Il n’est pas amené à se déplacer. On prévoira seulement comme méthodes :
-
-+ `constructor(x)`, qui construit le trésor en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera déposé le trésor) puisque la ligne est obligatoirement celle du haut (ligne 1), et le paramètre `id` sera l'identifiant de la balise qui sera naturellement associée au trésor.
-
-+ `initialiser(x)`, qui invoque la méthode initialiser de la classe `Element`. A vous de trouver avec quels paramètres on invoque cette méthode.
-
-Codez cette classe `Tresor` en complétant le fichier `tresor.js`. Testez les méthodes dans la console.
-
-Remarques :
+  **Rappel :** Si vous vous souvenez du [cours de HTML/CSS](https://romainlebreton.github.io/ProgWeb-HTMLCSS/tutorials/tutorial3.html#position), on peut positionner l'image par rapport à son père (l'image de la grille) en mettant l'image en `position:absolute`, et le père en `position:relative`. Nous l'avons déjà fait pour vous dans le CSS `jeu.css`.
  
-vous ferez appel au super-constructeur `super` dans `constructor(x)` ;
-vous ferez appel à la méthode mère `super.initialiser` de `Element` dans `initialiser(x)`.
+ <p align="center">
+    <img src="ressources/img2.png">
+ </p>
 
-Réactualisez la page, et testez votre code : 
++ `afficher()` qui affiche `spriteElement` en le rajoutant dans la balise `<div id="champ">`.
++ `cacher()` qui cache `spriteElement` en le supprimant dans la balise `<div id="champ">`.
 
+1. Écrivez la classe `Element` en complétant le fichier `element.js`.
 
-        let T = new Tresor(5);
-        T.placer();
+Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pouvez en console tester les commandes suivantes :
 
+```js
+let personnage = new Element(19, 12, 'img/personnage.png');
+personnage.afficher();
+personnage.placer(5, 5);
+personnage.cacher();
 
-## EXERCICE 3 - la classe Champ
+let tresor = new Element(0, 3, 'img/tresor.png');
+tresor.afficher();
+```
 
-Avant de coder la classe `Personnage`, qui hérite aussi de la classe `Element`, on va coder la classe `Champ` car `Personnage` utilise dans certaines de ses méthodes un objet `Champ`.
+## EXERCICE 2 - Les classes `Tresor`, `Mine` et `Personnage`
 
-Un objet `Champ` a pour attributs un tableau nommé `carte`, et un autre attribut nommé `balise_div` qui correspondra à la balise `html` naturellement associée au champ de mines. Comme pour `Tresor` et `Personnage`, on aurait pu se passer de cet attribut en le dissociant de l’objet. C’est juste un autre point de vue.
+Un trésor est un objet très simple qui n’est pas amené à se déplacer. Il n'a qu'un `constructor(colonne)` qui construit le trésor en invoquant le constructeur de la classe `Element` (avec `super(...)`), sachant que le trésor est sur la ligne du haut et que son image se trouve à l'adresse `"img/tresor.png"`.
 
-Un objet `Champ` aura 3 méthodes :
+2. Complétez la classe `Tresor` dans le fichier `element.js`.
 
-+ `constructor(xP,xT,proba)`, qui prend plusieurs étapes :
+La classe `Mine` est très similaire à `Tresor` : le constructeur prend juste deux arguments `ligne, colonne` sachant l'image des mines se trouve à l'adresse `"img/croix.png"`.
 
-	- créer `this.carte`, qui est un tableau matérialisant 20 lignes et 20 colonnes. Les paramètres `xP` et `xT` désignent les `coordX` initiales du personnage et du trésor. 
+3. Complétez la classe `Mine` dans le fichier `element.js`.
 
-	On pourra considérer `this.carte` comme un tableau de 20 lignes, chacune des lignes étant un tableau de 20 cases. Chacune des 400 cases sera remplie soit avec un 0 soit avec un 1, en fonction du tirage d’un nombre aléatoire classique entre 0 et 1. 
+La classe `Personnage` possède un attribut propre `score`. Voici ses méthodes :
 
-	On pourra décider que si ce nombre aléatoire est inférieur au paramètre `proba`, alors on insère un 1 (= une mine) et sinon un 0 (= pas de mine). 
+   * `constructor(colonne)` fonctionne comme pour `Tresor` mais sur la dernière ligne. Il faut aussi initialiser `score` à 200.
+   * `deplacer(dl, dc)` déplace le personnage de `dl` lignes et `dc` colonnes si le déplacement est possible (attention aux bords). Le score du joueur est décrémenté de 1 si un mouvement est réellement exécuté.
+   * `majSprite(nbMinesVoisines)` met à jour le `spriteElement` (la balise `<img>`) du personnage pour afficher l'image alternative `"img/personnage2.png"` si il y a une mine dans une case voisine.
 
-	N’oubliez pas la méthode push des tableaux en JavaScript. 
+4. Écrivez la classe `Personnage` en la rajoutant à la fin du fichier `element.js`.
 
-	- nettoyer un peu `this.carte`. Pour cela affectez de force 0 aux cases de `this.carte` correspondant aux proximités immédiates du trésor et du personnage. Le trésor ne doit pas être miné, ni sa proximité immédiate, ni celle de la position initiale du personnage.
+Voici un exemple de code pour tester vos implémentations.
 
-	Remarque : RIEN ne garantit qu’il existe un chemin possible vers le trésor. La probabilité qu’au moins un chemin victorieux existe dépend bien sûr du paramètre `proba`, et on peut penser que plus `proba` est faible, plus cette probabilité d'avoir au moins un chemin vers le trésor est importante.
+```js
+let tresor = new Tresor(7);
+tresor.afficher();
 
-	- Affecter à `this.balise_div` la bonne balise `html`.
+let mine = new Mine(10, 13);
+mine.afficher();
 
+let personnage = new Personnage(2);
+personnage.afficher();
+personnage.deplacer(0, -1);
+personnage.deplacer(0, -1);
+personnage.deplacer(0, -1); // Doit rester au bord
+personnage.deplacer(0, 1);
+personnage.deplacer(1, 0); // Doit rester au bord
+personnage.deplacer(-1, 0);
+personnage.majSprite(1); // Doit afficher un personnage mécontent
+personnage.majSprite(0); // Doit afficher un personnage content
+```
 
-+ `afficher()`, qui a pour mission de remplir `this.balise_div` de 400 images dont la source est le fichier `img/croix.png`, et dont les `top` et `left` seront à calculer. Ces images auront soit la classe css `visible`, soit la classe css `cachee`. Ainsi, on verra s’afficher des croix partout où il y a une mine, et nulle part ailleurs.
+## Exercice 4 - la classe `Jeu`
 
-+ `cacher()`, qui a pour mission de supprimer toutes les balises filles de `this.balise`, et donc potentiellement les 400 images crées par l’action de `afficher()`.
+La classe `Jeu` est responsable de la gestion globale des éléments du jeu, et en particulier les interactions entre les différents éléments placés sur la grille. C'est dans cette classe que va se trouver la plus grosse partie de la logique du jeu.
 
-Codez cette classe `Champ` en complétant le fichier `champ.js`. Testez les méthodes dans la console. Cette classe possède 3 méthodes pas simples à coder, il faut être méticuleux.
+Un objet de type `Jeu` dispose, entre autres, des attributs suivants :
+- un `Tresor` initialisé dans le constructeur, en lui donnant une position aléatoire sur la première ligne
+- un `Personnage` initialisé dans le constructeur en lui donnant une position aléatoire sur la dernière ligne
+- un tableau bidimensionnel `carte` de 20 lignes ayant chacune 20 booléens indiquant la position des mines : `this.mines[i][j]` est vrai s'il y a une mine sur la case en ligne `i` et colonne `j`. Ce tableau est initialisé dans le constructeur en choisissant aléatoirement pour chaque case s'il y a ou non une mine avec une probabilité `probaMine` passée en argument du constructeur. On s'assurera également qu'il n'y a pas de mine dans les cases immédiatement adjacentes aux positions initiales du trésor et du personnage.
+ 
+5. Écrivez le constructeur `constructor(probaMine)` de la classe `Jeu` qui doit initialiser les attributs décrits précédemment et afficher sur la page les images correspondant au trésor et au personnage.
 
-Pour les méthodes `afficher()` et `cacher()`, vous pourrez utiliser :
-	- `createElement`
-	- `appendChild`
-	- `removeChild`
+1. Ajoutez à la classe `Jeu` les méthodes
 
-Réactualisez la page, et testez votre code : 
+   * `afficherMines()` : Pour afficher les mines, il faut parcourir le tableau `mines` pour déterminer la position des mines, créer des objets de type `Mine` avec la bonne position et les afficher.
+   * `cacherMines()` : Il y a au moins deux façons de procéder :
+     1. Soit on enlève les balises qui correspondent aux `Mine`. Il peut être judicieux de les avoir stocké dans un attribut du `Jeu` pour pouvoir les cacher facilement.
+     1. Soit on vide `<div id="champ">` et on réaffiche uniquement le tresor et le personnage.
 
+1. Ajoutez à la classe `Jeu` une méthode `nbMinesVoisines()` qui renvoie le nombre de mines se trouvant dans des cases adjacentes à la position courante du personnage.
 
-        let C = new Champ(5,12,0.15);
-        C.afficher();
-        C.cacher();
-
-
-
-
-## EXERCICE 4 - la classe Personnage
-
-Un objet `Personnage` est plus complexe qu’un objet `Tresor`. Tout d’abord il a un attribut supplémentaire : son `score`, qui est au début de la partie fixé à 200. Ensuite, il a des méthodes liées à sa capacité de mouvement. Enfin, il a des méthodes liées au trésor et aux mines du champ. 
-
-**Méthodes à prévoir :**
-
-+ `constructor(x)`, qui construit le personnage en invoquant le constructeur de la classe `Element`. Il n’y a besoin que d’un paramètre `x` (la colonne où sera placé le personnage au début) puisque la ligne est obligatoirement celle du bas (ligne 20), et le paramètre name sera l'identifiant de la balise qui sera naturellement associée au personnage. Même remarque que pour `Tresor` (super-constructeur).
-
-+ `initialiser(x)`, qui invoque la méthode `initialiser` de la classe `Element`. A vous de trouver avec quels paramètres on invoque cette méthode. Il faudra aussi réinitialiser le `score` du personnage à 200. Ceci servira quand on recommence le même parcours après avoir perdu la partie. Même remarque que pour `Tresor` (`super.initialiser`).
-
-+ `nbProxMines(C)`, qui retourne le nombre de mines à proximité du personnage `this`, mines qui sont répertoriées dans `C.carte`.
-
-+ `indiquer_situation(C)`, qui calcule le nombre de mines à proximité de `this` en référence au champ de mines `C`, puis l’affiche dans la balise « affichage ». Cette méthode affiche aussi le `score` de `this` dans la balise « message ». Enfin, elle met à jour le `sprite` de `this` : si le nombre de mines à proximité est 0, c’est le sourire, sinon c’est la grimace.
-
-+ `mouvement(dx,dy)`, qui ajoute (si c’est possible ! => à tester) `dx` à `coordX` et `dy` à `coordY`. Quand ces additions sont possibles, il faudra aussi placer le personnage, diminuer son score d’une unité.
-
-+ `trouve(T)`, qui retourne un booléen disant si le personnage est arrivé au trésor `T` passé en paramètre.
-
-+ `explose(C)`, qui retourne un booléen disant si le personnage a mis le pied sur une mine du champ `C` passé en paramètre.
-
-Codez cette classe `Personnage` en complétant le fichier `personnage.js`. Testez les méthodes dans la console.
-
-		let xT = 5;
-		let xP = 12;
-		let proba = 0.15;
-		let T = new Tresor(xT);
-		let P = new Personnage(xP);
-		let C = new Champ(xP,xT,proba);
-		T.placer();
-		P.placer();
-		C.afficher();
-		P.mouvement(-1,0);
-		P.indiquer_situation(C);
-		etc
-
-
-Dans le jeu, il y aura des variables globales P, T, C. On pourrait coder le jeu en utilisant, au coeur des méthodes, ces variables globales. On peut aussi adopter le point de vue de les passer en paramètres à des méthodes qui gèrent un Tresor, un Personnage ou un Champ de manière générique. C'est le point de vue adopté ici.
-
+1. Ajoutez à la classe `Jeu` les méthodes `estGagne()` et `estPerdu()` qui renvoient un booléen indiquant si la partie est respectivement gagnée (le personnage se trouve sur le trésor) ou perdue (le personnage se trouve sur une mine ou son score est &leq; 0).
 
 ## EXERCICE 5 - le scénario du jeu
 
-Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les divers objets, et organiser les gestions d’événements. Ce fichier possède déjà une fonction partiellement codée, et qui va gérer les événements clavier. 
+Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les divers objets, et organiser les gestions d’événements. Ce fichier possède déjà une fonction partiellement codée, et qui va gérer les événements clavier.
 
-### Les variables globales : 
+Afin de pouvoir modifier le jeu à l'aide d'événements sur la page (clics ou clavier), on utilise une variable globale `jeu` dont la valeur sera l'objet de type `Jeu` de la partie en cours.
 
-- créez la variable `xP` qui est l’abscisse du futur personnage et initialisez-la à une valeur aléatoire entre 1 et 20 ;
-- créez la variable `xT` qui est l’abscisse du futur trésor et initialisez-la à une valeur aléatoire entre 1 et 20 ;
-- créez une variable `P` et initialisez-la par un appel au constructeur de `Personnage`, avec comme paramètre `xP` ;
-- créez une variable `T` et initialisez-la par un appel au constructeur de `Tresor`, avec comme paramètre `xT` ;
-- créez une variable `proba` et donnez-lui une valeur entre 0 et 1 qui vous semble raisonnable. Cette valeur correspond à la probabilité qu’a une case du champ de mines d’être minée. Au besoin, vous pourrez ajuster cette valeur par la suite.
-- créez une variable `C` et initialisez-la par un appel au constructeur de `Champ`, avec comme paramètres les nombres `xP`, `xT` et `proba` ;
-- sans modifier le code html, définissez l'attribut `onclick` de la balise dont l’identifiant est "rec" en lui donnant comme valeur la fonction `go` que nous allons décrire juste après :
+9. Complétez le code exécuté lorsque l'utilisateur appuie sur une touche du clavier (`addEventListener("keydown", ...)`) pour que le personnage se déplace lorsqu'on appuie sur les différentes touches de direction.
 
+1. Écrivez la fonction `miseAJour()` dont le rôle est de mettre à jour les différentes informations affichées :
+    - Le score du joueur affiché dans la balise d'identifiant `score`.
+    - L'image représentant le personnage en fonction du nombre de mines à proximité (en utilisant la méthode écrite précédemment).
+    - Le nombre de mines à proximité du joueur si la partie est encore en cours dans la balise d'identifiant `message`.
+    - Si le jeu est gagné ou perdu, il faut l'indiquer dans `<div id="message">` et afficher les mines.  
 
-### La fonction go :
+  Ajoutez un appel à cette fonction à la fin de la gestion des événements clavier (pour mettre à jour les informations lorsque le personnage se déplace).
 
-Cette fonction sera appelée pour lancer le jeu, mais aussi à chaque fois qu’on cliquera sur le lien « recommencer ». 
+  **Remarque :** Préférez `innerText` à `innerHTML` pour écrire du texte dans une balise. Cela fait l'équivalent d'un `htmlspecialchars` de PHP.
 
-il est possible que cela soit suite à une explosion, la carte des mines peut donc être affichée au moment où on clique sur le lien. Il faut donc coder la fonction `go` pour que :
- 
-- on commence par cacher cette carte ;
-- on initialise `P` avec comme paramètre `xP`, et on le place ;
-- on initialise `T` avec comme paramètre `xT`, et on le place ;
-- on indique la situation de `P` ;
-- enfin on met la page (le `<body>`) en écoute de l’événement `keydown`, avec comme fonction associée `gererClavier`.
+1. Écrivez une fonction `nouvellePartie()` qui démarre une nouvelle partie. Cette fonction doit :
+    - Enlever de la page tous les éléments correspondant à la partie actuelle.
+    - Créer un nouvel objet de type `Jeu` et mettre à jour la variable globale `jeu`.
+    - Appeler la fonction `miseAJour()` pour mettre à jour les affichages.
 
+1. Faites en sorte qu'une nouvelle partie soit automatiquement démarrée quand la page est chargée, et que la fonction `nouvellePartie()` soit appelée lorsque l'utilisateur clique sur le lien dont l'identifiant est `nouvelle-partie`.
 
-### La fonction gererClavier :
+## Exercice 6 - Améliorations
 
-Cette fonction prend un paramètre `event`, comme dans les exemples du cours. 
+13. Effectuez les modifications nécessaires pour qu'il ne soit plus possible de se déplacer lorsque la partie est terminée (gagnée ou perdue).
 
-- complétez les `case` 37, 38, 39 et 40 qui représentent les 4 mouvements du personnage.
-- pour la touche "a", c’est plus compliqué :
-	+ on retire 50 au score de `P` ;
-	+ on affiche la carte de `C` ;
-	+ une seconde après on cache cette carte.
-- puis on indique la nouvelle situation de `P` ;
-- ensuite, il faut compléter ce qu’on doit faire si le personnage met le pied sur une mine :
-	+ on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
-	+ on affiche la carte des mines ;
-	+ on met à l’affichage « perdu !!! ».
-- enfin, il faut compléter ce qu’on doit faire si le personnage trouve le trésor :
-	+ on retire l’écoute de l’événement `keydown` à `<body>`, pour bloquer la situation ;
-	+ on met à l’affichage « gagné !!! ».
+On veut maintenant ajouter une fonctionnalité supplémentaire au jeu. Lorsque l'utilisateur appuie sur la touche "A" du clavier, on veut afficher toutes les mines du terrain pendant 1 seconde avant de les cacher à nouveau. L'utilisation de cette fonctionnalité réduit le score du joueur de 50 points.
 
-Et pour finir, après tout ce code, il reste à appeler la fonction `go` par l’instruction `go()` ;
-
-Et c’est tout !!!
-
+14. Effectuez les modifications nécessaires dans votre programme pour implémenter cette fonctionnalité.  
+    **Bonus :** Veillez en particulier à bien gérer les éventuels problèmes qui pourraient se produire si l'utilisateur appuie plusieurs fois rapidement sur la touche "A".
