@@ -25,7 +25,7 @@ S’il arrive au trésor, ou s’il marche sur une mine, un message donne l’in
 
 Les fichiers `jeu.html` et `jeu.css` constituent une base de travail, ainsi que les images fournies. Vous testerez, dans la console, les méthodes que vous coderez.
 
-## EXERCICE 1 - La classe `Element`
+## Exercice 1 - La classe `Element`
 
 Vous utiliserez dans ce TD des objets des classes `Personnage`, `Tresor` et `Mine`. Ces trois classes héritent d'une classe `Element` qui regroupe les attributs et méthodes en commun.
 Il n’y aura donc pas d’objet `Element` proprement dit, mais un `Personnage`, un `Tresor` et des `Mine`.
@@ -71,7 +71,7 @@ let tresor = new Element(0, 3, 'img/tresor.png');
 tresor.afficher();
 ```
 
-## EXERCICE 2 - Les classes `Tresor`, `Mine` et `Personnage`
+## Exercice 2 - Les classes `Tresor`, `Mine` et `Personnage`
 
 Un trésor est un objet très simple qui n’est pas amené à se déplacer. Il n'a qu'un `constructor(colonne)` qui construit le trésor en invoquant le constructeur de la classe `Element` (avec `super(...)`), sachant que le trésor est sur la ligne du haut et que son image se trouve à l'adresse `"img/tresor.png"`.
 
@@ -110,7 +110,7 @@ personnage.majSprite(1); // Doit afficher un personnage mécontent
 personnage.majSprite(0); // Doit afficher un personnage content
 ```
 
-## Exercice 4 - la classe `Jeu`
+## Exercice 3 - la classe `Jeu`
 
 La classe `Jeu` est responsable de la gestion globale des éléments du jeu, et en particulier les interactions entre les différents éléments placés sur la grille. C'est dans cette classe que va se trouver la plus grosse partie de la logique du jeu.
 
@@ -132,7 +132,7 @@ Un objet de type `Jeu` dispose, entre autres, des attributs suivants :
 
 1. Ajoutez à la classe `Jeu` les méthodes `estGagne()` et `estPerdu()` qui renvoient un booléen indiquant si la partie est respectivement gagnée (le personnage se trouve sur le trésor) ou perdue (le personnage se trouve sur une mine ou son score est &leq; 0).
 
-## EXERCICE 5 - le scénario du jeu
+## Exercice 4 - le scénario du jeu
 
 Il reste à coder le fichier `scenario.js`, qui va faire entrer en scène les divers objets, et organiser les gestions d’événements. Ce fichier possède déjà une fonction partiellement codée, et qui va gérer les événements clavier.
 
@@ -157,7 +157,7 @@ Afin de pouvoir modifier le jeu à l'aide d'événements sur la page (clics ou c
 
 1. Faites en sorte qu'une nouvelle partie soit automatiquement démarrée quand la page est chargée, et que la fonction `nouvellePartie()` soit appelée lorsque l'utilisateur clique sur le lien dont l'identifiant est `nouvelle-partie`.
 
-## Exercice 6 - Améliorations
+## Exercice 5 - Améliorations
 
 13. Effectuez les modifications nécessaires pour qu'il ne soit plus possible de se déplacer lorsque la partie est terminée (gagnée ou perdue).
 
