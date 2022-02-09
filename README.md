@@ -117,7 +117,7 @@ La classe `Jeu` est responsable de la gestion globale des éléments du jeu, et 
 Un objet de type `Jeu` dispose, entre autres, des attributs suivants :
 - un `Tresor` initialisé dans le constructeur, en lui donnant une position aléatoire sur la première ligne
 - un `Personnage` initialisé dans le constructeur en lui donnant une position aléatoire sur la dernière ligne
-- un tableau bidimensionnel `carte` de 20 lignes ayant chacune 20 booléens indiquant la position des mines : `this.carte[i][j]` est vrai s'il y a une mine sur la case en ligne `i` et colonne `j`. Ce tableau est initialisé dans le constructeur en choisissant aléatoirement pour chaque case s'il y a ou non une mine avec une probabilité `probaMine` passée en argument du constructeur. On s'assurera également qu'il n'y a pas de mine dans les cases immédiatement adjacentes aux positions initiales du trésor et du personnage.
+- un tableau bidimensionnel `carte` de 20 lignes ayant chacune 20 booléens indiquant la position des mines : `this.carte[i][j]` est vrai s'il y a une mine sur la case en ligne `i` et colonne `j`. Ce tableau est initialisé dans le constructeur en choisissant aléatoirement pour chaque case s'il y a ou non une mine avec une probabilité `probaMine` passée en argument du constructeur. On s'assurera également qu'il n'y a pas de mine sur les positions du joueur et du trésor, ni dans les cases immédiatement adjacentes à ces positions.
  
 5. Écrivez le constructeur `constructor(probaMine)` de la classe `Jeu` qui doit initialiser les attributs décrits précédemment et afficher sur la page les images correspondant au trésor et au personnage.
 
