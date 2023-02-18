@@ -169,3 +169,7 @@ On veut maintenant ajouter une fonctionnalité supplémentaire au jeu. Lorsque l
 
 14. Effectuez les modifications nécessaires dans votre programme pour implémenter cette fonctionnalité.  
     **Bonus :** Veillez en particulier à bien gérer les éventuels problèmes qui pourraient se produire si l'utilisateur appuie plusieurs fois rapidement sur la touche "A".
+
+15. `Element` devrait être une classe abstraite. Bien que les classes abstraites
+    n'existent pas nativement en JavaScript, vous pouvez recoder leur
+    comportement facilement.
