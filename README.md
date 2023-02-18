@@ -1,13 +1,17 @@
-# ![](ressources/logo.jpeg) Prog web client riche - JavaScript
+---
+lang: fr
+---
+
+# ![](ressources/logo.jpeg) R.4.01 Développement Web - JavaScript
 
 ### IUT Montpellier-Sète – Département Informatique
 
 ## TD3
 #### _Thème : objets, classes, gestion d'événements par des écouteurs_
 
-Cliquez sur le lien ci-dessous pour faire, dans un dossier public_html/JS/TD3, votre fork privé du TD3 (**attention, pas de fork à la main !**):
-
-https://classroom.github.com/a/9Fm0badS
+Commencez par `git clone` le *fork* du TD3 que nous avons fait pour vous. Ce
+*fork* doit se trouver dans
+https://gitlabinfo.iutmontp.univ-montp2.fr/r4.01-developpementweb/etu/votre_login_IUT/TD3
 
 ## INTRODUCTION
 
@@ -40,7 +44,7 @@ On prévoit les méthodes suivantes :
 
 + `constructor(ligne, colonne, spriteURL)` qui 
   1. recopie `ligne` et `colonne` ;
-  1. stocke dans `spriteElement` une balise `<img>` (que vous créerez avec une méthode du [Cours 2](https://github.com/IUTInfoMontp-M4103C/Cours/raw/master/ressources/pdf/Cours2-JS-2020.pdf))<!-- `createElement` -->, qui aura la classe CSS `element` et dont l'adresse de l'image sera `spriteURL` (quel attribut de `<img>` utiliser ?)<!-- `src` --> ;
+  1. stocke dans `spriteElement` une balise `<img>` (que vous créerez avec une méthode du [Cours 2](http://romainlebreton.github.io/R.4.01-DeveloppementWeb-JavaScript/classes/class2.html))<!-- `createElement` -->, qui aura la classe CSS `element` et dont l'adresse de l'image sera `spriteURL` (quel attribut de `<img>` utiliser ?)<!-- `src` --> ;
   1. appelle la future méthode `placer(ligne, colonne)`.  
 
     **Remarque :** La balise n'est pas insérée dans la page Web et donc ne s'affiche pas pour l'instant.
@@ -48,7 +52,7 @@ On prévoit les méthodes suivantes :
 + `placer(ligne, colonne)` qui met à jour les attributs `ligne` et `colonne`, et positionne le `spriteElement` en ajustant son `top` et son `left`.
   Il faudra donc modifier la valeur de `this.spriteElement.style.top` et de `this.spriteElement.style.left`, par exemple `this.spriteElement.style.top=13px`. Chaque case de l’image de fond est un carré de `20px` de côté et le quadrillage est décalé de `51px` des bords de l’écran, comme indiqué ci-dessous. Le mode de calcul sera à mettre en place.
 
-  **Rappel :** Si vous vous souvenez du [cours de HTML/CSS](https://romainlebreton.github.io/ProgWeb-HTMLCSS/tutorials/tutorial3.html#position), on peut positionner l'image par rapport à son père (l'image de la grille) en mettant l'image en `position:absolute`, et le père en `position:relative`. Nous l'avons déjà fait pour vous dans le CSS `jeu.css`.
+  **Rappel :** Si vous vous souvenez du [cours de HTML/CSS](https://romainlebreton.github.io/R1.02-DeveloppementInterfacesWeb/tutorials/tutorial3.html#position), on peut positionner l'image par rapport à son père (l'image de la grille) en mettant l'image en `position:absolute`, et le père en `position:relative`. Nous l'avons déjà fait pour vous dans le CSS `jeu.css`.
  
  <p align="center">
     <img src="ressources/img2.png">
@@ -85,7 +89,7 @@ La classe `Personnage` possède un attribut propre `score`. Voici ses méthodes 
 
    * `constructor(colonne)` fonctionne comme pour `Tresor` mais sur la dernière ligne. Il faut aussi initialiser `score` à 200.
    * `deplacer(dl, dc)` déplace le personnage de `dl` lignes et `dc` colonnes si le déplacement est possible (attention aux bords). Le score du joueur est décrémenté de 1 si un mouvement est réellement exécuté.
-   * `majSprite(nbMinesVoisines)` met à jour le `spriteElement` (la balise `<img>`) du personnage pour afficher l'image alternative `"img/personnage2.png"` si il y a une mine dans une case voisine.
+   * `majSprite(nbMinesVoisines)` met à jour le `spriteElement` (la balise `<img>`) du personnage pour afficher l'image alternative `"img/personnage2.png"` s'il y a une mine dans une case voisine.
 
 4. Écrivez la classe `Personnage` en la rajoutant à la fin du fichier `element.js`.
 
@@ -126,7 +130,7 @@ Un objet de type `Jeu` dispose, entre autres, des attributs suivants :
    * `afficherMines()` : Pour afficher les mines, il faut parcourir le tableau `mines` pour déterminer la position des mines, créer des objets de type `Mine` avec la bonne position et les afficher.
    * `cacherMines()` : Il y a au moins deux façons de procéder :
      1. Soit on enlève les balises qui correspondent aux `Mine`. Il peut être judicieux de les avoir stocké dans un attribut du `Jeu` pour pouvoir les cacher facilement.
-     1. Soit on vide `<div id="champ">` et on réaffiche uniquement le tresor et le personnage.
+     1. Soit on vide `<div id="champ">` et on réaffiche uniquement le trésor et le personnage.
 
 1. Ajoutez à la classe `Jeu` une méthode `nbMinesVoisines()` qui renvoie le nombre de mines se trouvant dans des cases adjacentes à la position courante du personnage.
 
@@ -148,7 +152,7 @@ Afin de pouvoir modifier le jeu à l'aide d'événements sur la page (clics ou c
 
   Ajoutez un appel à cette fonction à la fin de la gestion des événements clavier (pour mettre à jour les informations lorsque le personnage se déplace).
 
-  **Remarque :** Préférez `innerText` à `innerHTML` pour écrire du texte dans une balise. Cela fait l'équivalent d'un `htmlspecialchars` de PHP.
+  **Remarque :** Préférez `textContent` à `innerHTML` pour écrire du texte dans une balise. Cela fait l'équivalent d'un `htmlspecialchars` de PHP.
 
 1. Écrivez une fonction `nouvellePartie()` qui démarre une nouvelle partie. Cette fonction doit :
     - Enlever de la page tous les éléments correspondant à la partie actuelle.

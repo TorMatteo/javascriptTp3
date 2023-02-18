@@ -1,3 +1,4 @@
+/** @type {Jeu} jeu */
 let jeu;  // variable globale représentant le jeu actuel
 
 document.addEventListener("keydown", function (event) {
