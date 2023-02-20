@@ -127,7 +127,7 @@ Un objet de type `Jeu` dispose, entre autres, des attributs suivants :
 
 1. Ajoutez à la classe `Jeu` les méthodes
 
-   * `afficherMines()` : Pour afficher les mines, il faut parcourir le tableau `mines` pour déterminer la position des mines, créer des objets de type `Mine` avec la bonne position et les afficher.
+   * `afficherMines()` : Pour afficher les mines, il faut parcourir le tableau `carte` pour déterminer la position des mines, créer des objets de type `Mine` avec la bonne position et les afficher.
    * `cacherMines()` : Il y a au moins deux façons de procéder :
      1. Soit on enlève les balises qui correspondent aux `Mine`. Il peut être judicieux de les avoir stocké dans un attribut du `Jeu` pour pouvoir les cacher facilement.
      1. Soit on vide `<div id="champ">` et on réaffiche uniquement le trésor et le personnage.
