@@ -161,7 +161,7 @@ Afin de pouvoir modifier le jeu à l'aide d'événements sur la page (clics ou c
 
 1. Faites en sorte qu'une nouvelle partie soit automatiquement démarrée quand la page est chargée, et que la fonction `nouvellePartie()` soit appelée lorsque l'utilisateur clique sur le lien dont l'identifiant est `nouvelle-partie`.
 
-## Exercice 5 - Améliorations
+## Exercice 5 - Bonus - Améliorations
 
 13. Effectuez les modifications nécessaires pour qu'il ne soit plus possible de se déplacer lorsque la partie est terminée (gagnée ou perdue).
 
@@ -172,4 +172,21 @@ On veut maintenant ajouter une fonctionnalité supplémentaire au jeu. Lorsque l
 
 15. `GameElement` devrait être une classe abstraite. Bien que les classes abstraites
     n'existent pas nativement en JavaScript, vous pouvez recoder leur
-    comportement facilement.
+    comportement facilement.  
+    [Indice](https://stackoverflow.com/questions/597769/how-do-i-create-an-abstract-base-class-in-javascript)
+
+16. Si l'on suit la façon de faire du sujet, plusieurs appels à `GameElement.afficher()` créent plusieurs balises.
+    C'est un inconvénient de cette solution.
+
+    Il serait préférable que le constructeur rajoute la balise `<img>` dans `<div id="champ">` avec une classe `cachee`, et que afficher / cacher ne fassent que activer / désactiver (`toggle`) cette classe `cachee`.
+
+17. Faire une boucle sur les 4 directions dans `nbMinesVoisines` pour limiter la duplication du code.
+
+18. Dans le constructeur de `Jeu`, créez la carte en 1 ligne de code en utilisant `Array.map()` et `[...Array(20)]`.
+
+19. Allez lire les notes complémentaires du cours 2 pour apprendre de nouvelles syntaxes efficaces de JavaScript.
+
+20. Lancez votre projet sous VSCode (ou VSCodium), et rajoutez la ligne de commentaire `\\ @ts-check` en haut de vos fichiers JavaScript
+    pour que VSCode lance une vérification partielle des types sur votre code.
+
+20. Demandez à votre enseignant de vous donner accès à l'ancien mini-projet portant sur le jeu de Taquin. 
