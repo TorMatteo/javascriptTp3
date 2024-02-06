@@ -29,12 +29,12 @@ S’il arrive au trésor, ou s’il marche sur une mine, un message donne l’in
 
 Les fichiers `jeu.html` et `jeu.css` constituent une base de travail, ainsi que les images fournies. Vous testerez, dans la console, les méthodes que vous coderez.
 
-## Exercice 1 - La classe `Element`
+## Exercice 1 - La classe `GameElement`
 
-Vous utiliserez dans ce TD des objets des classes `Personnage`, `Tresor` et `Mine`. Ces trois classes héritent d'une classe `Element` qui regroupe les attributs et méthodes en commun.
-Il n’y aura donc pas d’objet `Element` proprement dit, mais un `Personnage`, un `Tresor` et des `Mine`.
+Vous utiliserez dans ce TD des objets des classes `Personnage`, `Tresor` et `Mine`. Ces trois classes héritent d'une classe `GameElement` qui regroupe les attributs et méthodes en commun.
+Il n’y aura donc pas d’objet `GameElement` proprement dit, mais un `Personnage`, un `Tresor` et des `Mine`.
 
-On définit un `Element` par les attributs suivants :
+On définit un `GameElement` par les attributs suivants :
 
 - 0 &le; `ligne` < 20, qui représente le numéro de la ligne de l’élément dans le terrain. Partons du principe que `ligne = 0` correspond à la ligne du haut (celle du trésor) et `ligne = 19` correspond à la ligne du bas (celle du départ du personnage).
 - 0 &le; `colonne` < 20, nombre qui représente le numéro de la colonne de l'élément. La colonne de gauche est `colonne = 0`.
@@ -61,29 +61,29 @@ On prévoit les méthodes suivantes :
 + `afficher()` qui affiche `spriteElement` en le rajoutant dans la balise `<div id="champ">`.
 + `cacher()` qui cache `spriteElement` en le supprimant dans la balise `<div id="champ">`.
 
-1. Écrivez la classe `Element` en complétant le fichier `element.js`.
+1. Écrivez la classe `GameElement` en complétant le fichier `game_element.js`.
 
-Vous savez qu’il n’y aura pas d’objet `Element` proprement dit, mais pour vérifier la justesse de votre code, vous pouvez en console tester les commandes suivantes :
+Vous savez qu’il n’y aura pas d’objet `GameElement` proprement dit, mais pour vérifier la justesse de votre code, vous pouvez en console tester les commandes suivantes :
 
 ```js
-let personnage = new Element(19, 12, 'img/personnage.png');
+let personnage = new GameElement(19, 12, 'img/personnage.png');
 personnage.afficher();
 personnage.placer(5, 5);
 personnage.cacher();
 
-let tresor = new Element(0, 3, 'img/tresor.png');
+let tresor = new GameElement(0, 3, 'img/tresor.png');
 tresor.afficher();
 ```
 
 ## Exercice 2 - Les classes `Tresor`, `Mine` et `Personnage`
 
-Un trésor est un objet très simple qui n’est pas amené à se déplacer. Il n'a qu'un `constructor(colonne)` qui construit le trésor en invoquant le constructeur de la classe `Element` (avec `super(...)`), sachant que le trésor est sur la ligne du haut et que son image se trouve à l'adresse `"img/tresor.png"`.
+Un trésor est un objet très simple qui n’est pas amené à se déplacer. Il n'a qu'un `constructor(colonne)` qui construit le trésor en invoquant le constructeur de la classe `GameElement` (avec `super(...)`), sachant que le trésor est sur la ligne du haut et que son image se trouve à l'adresse `"img/tresor.png"`.
 
-2. Complétez la classe `Tresor` dans le fichier `element.js`.
+2. Complétez la classe `Tresor` dans le fichier `game_element.js`.
 
 La classe `Mine` est très similaire à `Tresor` : le constructeur prend juste deux arguments `ligne, colonne` sachant l'image des mines se trouve à l'adresse `"img/croix.png"`.
 
-3. Complétez la classe `Mine` dans le fichier `element.js`.
+3. Complétez la classe `Mine` dans le fichier `game_element.js`.
 
 La classe `Personnage` possède un attribut propre `score`. Voici ses méthodes :
 
@@ -91,7 +91,7 @@ La classe `Personnage` possède un attribut propre `score`. Voici ses méthodes 
    * `deplacer(dl, dc)` déplace le personnage de `dl` lignes et `dc` colonnes si le déplacement est possible (attention aux bords). Le score du joueur est décrémenté de 1 si un mouvement est réellement exécuté.
    * `majSprite(nbMinesVoisines)` met à jour le `spriteElement` (la balise `<img>`) du personnage pour afficher l'image alternative `"img/personnage2.png"` s'il y a une mine dans une case voisine.
 
-4. Écrivez la classe `Personnage` en la rajoutant à la fin du fichier `element.js`.
+4. Écrivez la classe `Personnage` en la rajoutant à la fin du fichier `game_element.js`.
 
 Voici un exemple de code pour tester vos implémentations.
 
@@ -170,6 +170,6 @@ On veut maintenant ajouter une fonctionnalité supplémentaire au jeu. Lorsque l
 14. Effectuez les modifications nécessaires dans votre programme pour implémenter cette fonctionnalité.  
     **Bonus :** Veillez en particulier à bien gérer les éventuels problèmes qui pourraient se produire si l'utilisateur appuie plusieurs fois rapidement sur la touche "A".
 
-15. `Element` devrait être une classe abstraite. Bien que les classes abstraites
+15. `GameElement` devrait être une classe abstraite. Bien que les classes abstraites
     n'existent pas nativement en JavaScript, vous pouvez recoder leur
     comportement facilement.

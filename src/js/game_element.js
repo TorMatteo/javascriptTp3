@@ -1,4 +1,4 @@
-class Element {
+class GameElement {
     constructor(ligne, colonne, spriteURL) {
         // à compléter
     }
@@ -30,21 +30,21 @@ class Element {
 }
 
 
-class Tresor extends Element {
+class Tresor extends GameElement {
     constructor(colonne) {
         // à compléter
     }
 }
 
 
-class Mine extends Element {
+class Mine extends GameElement {
     constructor(ligne, colonne) {
         // à compléter
     }
 }
 
 
-class Personnage extends Element {
+class Personnage extends GameElement {
     constructor(colonne) {
         // à compléter
     }
