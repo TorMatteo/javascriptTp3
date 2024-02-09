@@ -1,6 +1,12 @@
 class GameElement {
+
     constructor(ligne, colonne, spriteURL) {
-        // à compléter
+        this.ligne = ligne;
+        this.colonne = colonne;
+        this.spriteElement = document.createElement("img");
+        this.spriteElement.setAttribute("class", "element");
+        this.spriteElement.setAttribute("src", "spriteURL")
+        this.placer(this.ligne,this.colonne);
     }
 
     /**
@@ -9,7 +15,10 @@ class GameElement {
      * @param colonne {Number} indice de la colonne où placer l'élément
      */
     placer(ligne, colonne) {
-        // à compléter
+        this.spriteElement.style.top= 51+"px"+colonne+"px";
+        this.spriteElement.style.left= 51+"px"+ligne+"px";
+        this.ligne = ligne;
+        this.colonne = colonne;
     }
 
     /**
@@ -17,7 +26,8 @@ class GameElement {
      * Ajoute l'élément (= la balise) dans le <div id="champ">
      */
     afficher() {
-        // à compléter
+        let blabla = document.getElementById("champ");
+        blabla.appendChild(this.spriteElement);
     }
 
     /**
@@ -25,7 +35,8 @@ class GameElement {
      * Supprime l'élément du <div id="champ">
      */
     cacher() {
-        // à compléter
+        let blabla = document.getElementById("champ");
+        blabla.removeChild(this.spriteElement);
     }
 }
 
