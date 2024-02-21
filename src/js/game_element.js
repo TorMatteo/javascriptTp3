@@ -5,7 +5,7 @@ class GameElement {
         this.colonne = colonne;
         this.spriteElement = document.createElement("img");
         this.spriteElement.setAttribute("class", "element");
-        this.spriteElement.setAttribute("src", "spriteURL")
+        this.spriteElement.setAttribute("src", spriteURL)
         this.placer(this.ligne,this.colonne);
     }
 
@@ -15,10 +15,12 @@ class GameElement {
      * @param colonne {Number} indice de la colonne où placer l'élément
      */
     placer(ligne, colonne) {
-        this.spriteElement.style.top= 51+"px"+colonne+"px";
-        this.spriteElement.style.left= 51+"px"+ligne+"px";
         this.ligne = ligne;
         this.colonne = colonne;
+        const lignePlacement = 51 + (ligne*20);
+        const colonnePlacement = 51 + (colonne*20);
+        this.spriteElement.style.top= `${lignePlacement}px`;
+        this.spriteElement.style.left= `${colonnePlacement}px`;
     }
 
     /**
@@ -43,21 +45,22 @@ class GameElement {
 
 class Tresor extends GameElement {
     constructor(colonne) {
-        // à compléter
+        super(0, colonne, "img/tresor.png");
     }
 }
 
 
 class Mine extends GameElement {
     constructor(ligne, colonne) {
-        // à compléter
+        super(ligne, colonne, "img/croix.png");
     }
 }
 
 
 class Personnage extends GameElement {
     constructor(colonne) {
-        // à compléter
+       super(19, colonne, "img/personnage.png");
+       this.score = 200;
     }
 
     /**
@@ -70,7 +73,18 @@ class Personnage extends GameElement {
      * @param dc {Number} déplacement horizontal du joueur (modifie la colonne)
      */
     deplacer(dl, dc) {
-        // à compléter
+        if(dl !== 0){
+            if(dl === 1 && this.ligne !== 19 || dl === -1 && this.ligne !== 0){
+                this.placer(this.ligne + dl, this.colonne);
+                this.score = this.score - 1;
+
+            }
+        }else if(dc !== 0){
+            if(dc === 1 && this.colonne !== 19 || dc === -1 && this.colonne !== 0){
+                this.placer(this.ligne, this.colonne + dc);
+                this.score = this.score - 1;
+            }
+        }
     }
 
     /**
@@ -79,6 +93,10 @@ class Personnage extends GameElement {
      * @param nbMinesVoisines {Number} nombre de mines dans les cases voisines
      */
     majSprite(nbMinesVoisines) {
-        // à compléter
+        if(nbMinesVoisines> 0){
+            this.spriteElement.setAttribute("src", "img/personnage2.png")
+        }else{
+             this.spriteElement.setAttribute("src", "img/personnage.png")
+        }
     }
 }

@@ -1,22 +1,28 @@
 /** @type {Jeu} jeu */
 let jeu;  // variable globale représentant le jeu actuel
+const boutonNouvellePartie = document.getElementById("nouvelle-partie");
 
 document.addEventListener("keydown", function (event) {
     switch (event.key) {
         case 'ArrowLeft':
-            // déplacement vers la gauche
+            jeu.personnage.deplacer(0, -1);
+            miseAJour();
             break;
         case 'ArrowUp':
-            // déplacement vers le haut
+            jeu.personnage.deplacer(-1, 0);
+            miseAJour();
             break;
         case 'ArrowRight':
-            // déplacement vers la droite
+            jeu.personnage.deplacer(0, 1);
+            miseAJour();
             break;
         case 'ArrowDown':
-            // déplacement vers le bas
+            jeu.personnage.deplacer(1, 0)
+            miseAJour();
             break;
         default:
     }
+
 });
 
 
@@ -28,7 +34,25 @@ document.addEventListener("keydown", function (event) {
  * - met à jour l'image représentant le joueur
  */
 function miseAJour() {
-    // à compléter
+    let scoreElement = document.getElementById("score");
+    scoreElement.textContent = "Score : " + jeu.personnage.score;
+    let nbMines = jeu.nbMinesVoisines();
+    jeu.personnage.majSprite(nbMines);
+    let messageElement = document.getElementById("message");
+    messageElement.textContent = "" + nbMines;
+    console.log(jeu.personnage.ligne);
+    console.log(jeu.personnage.colonne);
+    console.log(jeu.tresor.ligne);
+    console.log(jeu.tresor.colonne);
+    if (jeu.estPerdu() === true) {
+        messageElement.textContent = "Vous avez perdu";
+        jeu.afficherMines();
+    } else if (jeu.estGagne() === true) {
+        messageElement.textContent = "Vous avez gagné";
+        jeu.afficherMines();
+    }
+
+
 }
 
 
@@ -36,10 +60,19 @@ function miseAJour() {
  * Démarre une nouvelle partie
  */
 function nouvellePartie() {
-    // à compléter
+    document.getElementById("champ").innerHTML = "";
+    document.getElementById("message").innerHTML = "";
+    document.getElementById("score").innerHTML = "";
+    jeu = new Jeu(Math.random());
+    miseAJour();
+
 }
 
 
 window.addEventListener("load", function () {
-    // à compléter
+    nouvellePartie();
 });
+
+boutonNouvellePartie.addEventListener("click", function () {
+    nouvellePartie();
+})
